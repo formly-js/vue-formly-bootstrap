@@ -12,7 +12,7 @@ or if you can just include the script:
 
 ##Usage
 ```
-import VueFormly from 'vue-formly');
+import VueFormly from 'vue-formly';
 import VueFormlyBootstrap from 'vue-formly-bootstrap';
 Vue.use(VueFormly);
 Vue.use(VueFormlyBootstrap);
