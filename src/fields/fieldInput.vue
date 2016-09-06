@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
-    <label v-if="form[key].label">{{form[key].label}}</label>
-    <input class="form-control" :type="form[key].inputType" v-model="form[key].value" :placeholder="form[key].placeholder">
+    <label v-if="form[key].label" :for="form[key].id ? form[key].id : null">{{form[key].label}}</label>
+    <input class="form-control" :id="form[key].id ? form[key].id : null" :type="form[key].inputType" v-model="form[key].value" :placeholder="form[key].placeholder">
   </div>
 </template>
 

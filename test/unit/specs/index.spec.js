@@ -39,17 +39,23 @@ describe('components', () => {
             data.form.test.type = 'input';
             data.form.test.inputType = 'text';
             data.form.test.placeholder = 'holding';
+            data.form.test.id = 'someId';
             createForm(data);
 
             let inputs = vm.$el.querySelectorAll('input');
             let input = inputs[0];
+            let labels = vm.$el.querySelectorAll('label');
+            let label = labels[0];
 
             expect(inputs).to.be.length(1);
             expect(input.type).to.equal('text');
-            expect(vm.$el.querySelectorAll('label')).to.be.length(1);
-            expect(vm.$el.querySelectorAll('label')[0].textContent).to.equal(data.form.test.label);
-            expect(vm.$el.querySelectorAll('input.form-control')).to.be.length(1);
+            expect(input.id).to.equal(data.form.test.id);
             expect(input.placeholder).to.equal('holding');
+            expect(input.className).to.equal('form-control');
+            
+            expect(labels).to.be.length(1);
+            expect(label.textContent).to.equal(data.form.test.label);
+            expect(label.htmlFor).to.equal(data.form.test.id);
 
             vm.form.test.value = 'testing';
 
@@ -70,5 +76,7 @@ describe('components', () => {
             expect(vm.$el.querySelectorAll('label')).to.be.length(0);
         });
     });
+
+    
     
 });
