@@ -36,3 +36,4 @@ Coming soon...
 * [ ] Hide/Show options
 * [ ] Custom attributes
 * [ ] Custom Classes
+* [ ] Custom events
