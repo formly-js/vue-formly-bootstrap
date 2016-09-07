@@ -5,7 +5,7 @@ import FormlyBootstrap from 'src/index';
 Vue.use(VueFormly);
 Vue.use(FormlyBootstrap);
 
-let el, vm;
+let el, vm, data;
 
 function createForm(){
     el = document.createElement('div');
@@ -18,8 +18,12 @@ function createForm(){
     return [el, vm];
 }
 
-let data;
-
+function trigger (target, event, process) {
+    var e = document.createEvent('HTMLEvents')
+    e.initEvent(event, true, true)
+    if (process) process(e)
+    target.dispatchEvent(e)
+}
 
 describe('components', () => {
 
@@ -31,6 +35,26 @@ describe('components', () => {
                 }
             }
         };
+    });
+
+    describe('functions', () => {
+
+        beforeEach(() => {
+            data.form.test.type = 'input';
+            data.form.test.inputType = 'text';
+        });
+
+        it('dirty', () => {
+            createForm();
+            expect(vm.form.test.$dirty).to.be.false;
+        });
+
+        it('blur', () => {
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'blur');
+            expect(vm.form.test.$dirty).to.be.true;
+        });
+        
     });
 
     describe('input', () => {
@@ -75,6 +99,7 @@ describe('components', () => {
 
             expect(vm.$el.querySelectorAll('label')).to.be.length(0);
         });
+
     });
 
     

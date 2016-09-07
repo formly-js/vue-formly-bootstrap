@@ -1,5 +1,3 @@
-import VueFormly from 'vue-formly';
-
 let Fields = require.context("./fields/", false, /^\.\/field([\w-_]+)\.vue$/);
 let FormlyBootstrap = {
     install(Vue, options){
