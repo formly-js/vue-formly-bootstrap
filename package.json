@@ -1,7 +1,7 @@
 {
   "name": "vue-formly-bootstrap",
   "version": "0.0.0",
-  "description": "A bootstrap bundle of form inputs for vue-formly",
+  "description": "A bootstrap based form input bundle for Vue Formly",
   "main": "dist/vue-formly-bootstrap.js",
   "scripts": {
     "test": "karma start test/unit/karma.conf.js",
