@@ -1,11 +1,15 @@
+import chai from 'chai';
 import {expect} from 'chai';
+import sinonChai from 'sinon-chai';
+import sinon from 'sinon';
 import Vue from 'vue';
 import VueFormly from 'vue-formly';
 import FormlyBootstrap from 'src/index';
 Vue.use(VueFormly);
 Vue.use(FormlyBootstrap);
+chai.use(sinonChai);
 
-let el, vm, data;
+let el, vm, data, spy;
 
 function createForm(){
     el = document.createElement('div');
@@ -19,10 +23,10 @@ function createForm(){
 }
 
 function trigger (target, event, process) {
-    var e = document.createEvent('HTMLEvents')
-    e.initEvent(event, true, true)
-    if (process) process(e)
-    target.dispatchEvent(e)
+    var e = document.createEvent('HTMLEvents');
+    e.initEvent(event, true, true);
+    if (process) process(e);
+    target.dispatchEvent(e);
 }
 
 describe('components', () => {
@@ -42,17 +46,64 @@ describe('components', () => {
         beforeEach(() => {
             data.form.test.type = 'input';
             data.form.test.inputType = 'text';
+            spy = sinon.spy();
         });
 
-        it('dirty', () => {
+        it('dirty/active', () => {
             createForm();
             expect(vm.form.test.$dirty).to.be.false;
+            expect(vm.form.test.$active).to.be.false;
         });
 
         it('blur', () => {
+            let copy = {};
+            data.form.test.onBlur = function(e){
+                copy = this.form;
+            };
             createForm();
             trigger(vm.$el.querySelectorAll('input')[0], 'blur');
+            expect(vm.form.test.$active).to.be.false;
             expect(vm.form.test.$dirty).to.be.true;
+            //check that "this" is the same
+            //the deep equal of "this" seemed to time out
+            expect(copy).to.deep.equal(vm.form);
+        });
+        
+        it('focus', () => {
+            data.form.test.onFocus = spy;
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'focus');
+            expect(spy.called).to.be.true;
+            expect(vm.form.test.$active).to.be.true;
+        });
+
+        it('click', () => {
+            data.form.test.onClick = spy;
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'click');
+            expect(spy.called).to.be.true;
+        });
+
+        it('change', () => {
+            data.form.test.onChange = spy;
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'change');
+            expect(spy.called).to.be.true;
+            expect(vm.form.test.$dirty).to.be.true;           
+        });
+
+        it('keyup', () => {
+            data.form.test.onKeyup = spy;
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'keyup');
+            expect(spy.called).to.be.true;
+        });
+
+        it('keydown', () => {
+            data.form.test.onKeydown = spy;
+            createForm();
+            trigger(vm.$el.querySelectorAll('input')[0], 'keydown');
+            expect(spy.called).to.be.true;
         });
         
     });
