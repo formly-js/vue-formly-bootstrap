@@ -29,7 +29,7 @@ function trigger (target, event, process) {
     target.dispatchEvent(e);
 }
 
-describe('components', () => {
+describe('Bootstrap Field Inputs', () => {
 
     beforeEach(() => {
         data = {
@@ -106,6 +106,21 @@ describe('components', () => {
             expect(spy.called).to.be.true;
         });
         
+    });
+
+    describe('attributes', () => {
+        it('should pass attributes', () => {
+            data.form.test.type = 'input';
+            data.form.test.inputType = 'text';
+            data.form.test.atts = {
+                'data-foo': 'bar',
+                'data-bar': 'foo'
+            };
+            createForm();
+            let input = vm.$el.querySelectorAll('input')[0];
+            expect(input.dataset.foo).to.equal('bar');
+            expect(input.dataset.bar).to.equal('foo');
+        });
     });
 
     describe('input', () => {

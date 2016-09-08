@@ -1,6 +1,9 @@
+import directives from './directives/index.js';
 let Fields = require.context("./fields/", false, /^\.\/field([\w-_]+)\.vue$/);
 let FormlyBootstrap = {
     install(Vue, options){
+        directives(Vue);
+        
         Fields.keys().forEach((key) => {
             //remove all the .vue crap
             let component = key
