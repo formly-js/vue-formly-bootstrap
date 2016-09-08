@@ -108,8 +108,8 @@ describe('Bootstrap Field Inputs', () => {
         
     });
 
-    describe('attributes', () => {
-        it('should pass attributes', () => {
+    describe('classes & attributes', () => {
+        it('attributes', () => {
             data.form.test.type = 'input';
             data.form.test.inputType = 'text';
             data.form.test.atts = {
@@ -120,6 +120,18 @@ describe('Bootstrap Field Inputs', () => {
             let input = vm.$el.querySelectorAll('input')[0];
             expect(input.dataset.foo).to.equal('bar');
             expect(input.dataset.bar).to.equal('foo');
+        });
+
+        it('classes', () => {
+            data.form.test.type = 'input';
+            data.form.test.inputType = 'text';
+            data.form.test.classes = {
+                'class-a': true,
+                'class-b': false
+            };
+            createForm();
+            let input = vm.$el.querySelectorAll('input')[0];
+            expect(input.className).to.equal('form-control class-a');
         });
     });
 
