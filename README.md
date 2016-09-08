@@ -32,8 +32,8 @@ Coming soon...
 * [ ] Radio Buttons
 * [ ] Date Picker
 * [ ] Other funky form inputs
-* [ ] Dirty/Clean checking
+* [x] Dirty/Clean checking
 * [ ] Hide/Show options
-* [ ] Custom attributes
+* [x] Custom attributes
 * [ ] Custom Classes
-* [ ] Custom events
+* [x] Custom events
