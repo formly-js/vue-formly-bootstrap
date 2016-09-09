@@ -95,26 +95,26 @@ function describeFunctions(inputElement){
     });
 };
 
-function describeAttributes(inputElement, exclude = []){
+function describeAttributes(inputElement, testPlaceholder = true){
     beforeEach(()=>{
         data.form.test.type = inputElement;
         data.form.test.inputType = 'text';
     });
     
     it('attributes', () => {
-        if ( exclude.indexOf('attributes') >= 0 ) return true;
         data.form.test.atts = {
             'data-foo': 'bar',
-            'data-bar': 'foo'
+            'data-bar': 'foo',
+            'placeholder': 'holding'
         };
         createForm();
         let input = vm.$el.querySelectorAll(inputElement)[0];
         expect(input.dataset.foo).to.equal('bar');
         expect(input.dataset.bar).to.equal('foo');
+        if ( testPlaceholder ) expect(input.placeholder).to.equal('holding');
     });
 
     it('classes', () => {
-        if ( exclude.indexOf('classes') >= 0 ) return true;
         data.form.test.classes = {
             'class-a': true,
             'class-b': false
@@ -124,18 +124,7 @@ function describeAttributes(inputElement, exclude = []){
         expect(input.className).to.equal('form-control class-a');
     });
 
-
-
-    it('placeholder', () => {
-        if ( exclude.indexOf('placeholder') >= 0 ) return;
-        data.form.test.placeholder = 'holding';
-        createForm();
-        let input = vm.$el.querySelectorAll(inputElement)[0];
-        expect(input.placeholder).to.equal('holding');
-    });
-
     it('id', () => {
-        if ( exclude.indexOf('id') >= 0 ) return true;
         data.form.test.id = 'someId';
         createForm();
         let input = vm.$el.querySelectorAll(inputElement)[0];
@@ -219,7 +208,7 @@ describe('Bootstrap Field Inputs', () => {
             describeFunctions('select');
         });
         describe('classes & attributes', () => {
-            describeAttributes('select', ['placeholder']);
+            describeAttributes('select', false);
         });
         describe('conditional elements', ()=>{
             describeConditional('select');
@@ -233,6 +222,31 @@ describe('Bootstrap Field Inputs', () => {
             let input = inputs[0];
 
             expect(inputs).to.be.length(1);
+        });
+
+        it('array options', () => {
+            data.form.test.type = 'select';
+            data.form.test.options = ['one', 'two', 'three'];
+            createForm();
+            let options = vm.$el.querySelectorAll('option');
+            let option = options[0];
+            expect(options).to.be.length(3);
+            expect(option.value).to.equal('one');
+            expect(option.innerHTML).to.equal('one');
+        });
+
+        it('object options', () => {
+            data.form.test.type = 'select';
+            data.form.test.options = [
+                { label: 'Foo', value: 'bar' },
+                { label: 'Bar', value: 'foo' }
+            ];
+            createForm();
+            let options = vm.$el.querySelectorAll('option');
+            let option = options[0];
+            expect(options).to.be.length(2);
+            expect(option.value).to.equal('bar');
+            expect(option.innerHTML).to.equal('Foo');
         });
          
     });
