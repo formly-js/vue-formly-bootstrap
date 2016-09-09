@@ -26,8 +26,8 @@ Coming soon...
 
 ##To Do
 * [x] Input
-* [ ] Select
-* [ ] Text Area
+* [x] Select
+* [x] Text Area
 * [ ] Checkbox
 * [ ] Radio Buttons
 * [ ] Date Picker
@@ -35,5 +35,5 @@ Coming soon...
 * [x] Dirty/Clean checking
 * [ ] Hide/Show options
 * [x] Custom attributes
-* [ ] Custom Classes
+* [x] Custom Classes
 * [x] Custom events

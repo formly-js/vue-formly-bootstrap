@@ -165,7 +165,7 @@ describe('Bootstrap Field Inputs', () => {
         };
     });
 
-    describe('=== Input ===', () => {
+    describe('Input', () => {
         
         describe('functions',() =>{
             describeFunctions('input');
@@ -203,7 +203,7 @@ describe('Bootstrap Field Inputs', () => {
 
 
 
-    describe('=== Select ===', () => {
+    describe('Select', () => {
         describe('functions', ()=>{
             describeFunctions('select');
         });
@@ -251,6 +251,26 @@ describe('Bootstrap Field Inputs', () => {
          
     });
 
-    
+    describe('Textarea', () => {
+        describe('functions', ()=>{
+            describeFunctions('textarea');
+        });
+        describe('classes & attributes', () => {
+            describeAttributes('textarea');
+        });
+        describe('conditional elements', ()=>{
+            describeConditional('textarea');
+        });
+
+        it('layout', () => {
+            data.form.test.type = 'textarea';
+            createForm();
+
+            let inputs = vm.$el.querySelectorAll('textarea');
+            let input = inputs[0];
+
+            expect(inputs).to.be.length(1);
+        });
+    });
     
 });
