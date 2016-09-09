@@ -199,6 +199,16 @@ describe('Bootstrap Field Inputs', () => {
             }, 0);
             
         });
+
+        it('defaults to text', () => {
+            data.form.test.type = 'input';
+            data.form.test.inputType = '';
+            createForm(data);
+
+            let inputs = vm.$el.querySelectorAll('input');
+            let input = inputs[0];
+            expect(input.type).to.equal('text');
+        });
     });
 
 
