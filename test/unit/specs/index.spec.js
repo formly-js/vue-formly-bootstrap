@@ -146,13 +146,21 @@ function describeAttributes(inputElement, exclude = []){
 };
 
 function describeConditional(inputElement){
-    it('label', () => {
+    it('label', (done) => {
         data.form.test.type = inputElement;
         data.form.test.inputType = 'text';
         data.form.test.label = '';
         createForm(data);
 
         expect(vm.$el.querySelectorAll('label')).to.be.length(0);
+
+        vm.form.test.label = 'testing';
+
+        setTimeout(()=>{
+            expect(vm.$el.querySelectorAll('label')).to.be.length(1);
+            expect(vm.$el.querySelectorAll('label')[0].innerHTML).to.equal('testing');
+            done();
+        },0);
     });
 };
 
@@ -193,9 +201,6 @@ describe('Bootstrap Field Inputs', () => {
             expect(inputs).to.be.length(1);
             expect(input.type).to.equal('text');
             expect(input.className).to.equal('form-control');
-            
-            expect(labels).to.be.length(1);
-            expect(label.textContent).to.equal(data.form.test.label);
 
             vm.form.test.value = 'testing';
 
@@ -218,6 +223,16 @@ describe('Bootstrap Field Inputs', () => {
         });
         describe('conditional elements', ()=>{
             describeConditional('select');
+        });
+
+        it('layout', () => {
+            data.form.test.type = 'select';
+            createForm(data);
+
+            let inputs = vm.$el.querySelectorAll('select');
+            let input = inputs[0];
+
+            expect(inputs).to.be.length(1);
         });
          
     });
