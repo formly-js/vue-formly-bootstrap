@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import Vue from 'vue';
 import VueFormly from 'vue-formly';
 import FormlyBootstrap from 'src/index';
+//import {blur} from './expectations';
 Vue.use(VueFormly);
 Vue.use(FormlyBootstrap);
 chai.use(sinonChai);
@@ -29,9 +30,135 @@ function trigger (target, event, process) {
     target.dispatchEvent(e);
 }
 
+function describeFunctions(inputElement){
+    beforeEach(() => {
+        data.form.test.type = inputElement;
+        data.form.test.inputType = 'text';
+        spy = sinon.spy();
+    });
+
+    it('dirty/active', () => {
+        createForm();
+        expect(vm.form.test.$dirty).to.be.false;
+        expect(vm.form.test.$active).to.be.false;
+    });
+    
+    it('blur', ()=>{
+        let copy = {};
+        data.form.test.onBlur = function(e){
+            copy = this.form;
+        };
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'blur');
+        expect(vm.form.test.$active).to.be.false;
+        expect(vm.form.test.$dirty).to.be.true;
+        //check that "this" is the same
+        //the deep equal of "this" seemed to time out
+        expect(copy).to.deep.equal(vm.form);
+    });
+
+    it('focus', () => {
+        data.form.test.onFocus = spy;
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'focus');
+        expect(spy.called).to.be.true;
+        expect(vm.form.test.$active).to.be.true;
+    });
+
+    it('click', () => {
+        data.form.test.onClick = spy;
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'click');
+        expect(spy.called).to.be.true;
+    });
+
+    it('change', () => {
+        data.form.test.onChange = spy;
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'change');
+        expect(spy.called).to.be.true;
+        expect(vm.form.test.$dirty).to.be.true;           
+    });
+
+    it('keyup', () => {
+        data.form.test.onKeyup = spy;
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'keyup');
+        expect(spy.called).to.be.true;
+    });
+
+    it('keydown', () => {
+        data.form.test.onKeydown = spy;
+        createForm();
+        trigger(vm.$el.querySelectorAll(inputElement)[0], 'keydown');
+        expect(spy.called).to.be.true;
+    });
+};
+
+function describeAttributes(inputElement, exclude = []){
+    beforeEach(()=>{
+        data.form.test.type = inputElement;
+        data.form.test.inputType = 'text';
+    });
+    
+    it('attributes', () => {
+        if ( exclude.indexOf('attributes') >= 0 ) return true;
+        data.form.test.atts = {
+            'data-foo': 'bar',
+            'data-bar': 'foo'
+        };
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        expect(input.dataset.foo).to.equal('bar');
+        expect(input.dataset.bar).to.equal('foo');
+    });
+
+    it('classes', () => {
+        if ( exclude.indexOf('classes') >= 0 ) return true;
+        data.form.test.classes = {
+            'class-a': true,
+            'class-b': false
+        };
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        expect(input.className).to.equal('form-control class-a');
+    });
+
+
+
+    it('placeholder', () => {
+        if ( exclude.indexOf('placeholder') >= 0 ) return;
+        data.form.test.placeholder = 'holding';
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        expect(input.placeholder).to.equal('holding');
+    });
+
+    it('id', () => {
+        if ( exclude.indexOf('id') >= 0 ) return true;
+        data.form.test.id = 'someId';
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        let label = vm.$el.querySelectorAll('label')[0];
+        expect(input.id).to.equal(data.form.test.id);
+        expect(label.htmlFor).to.equal(data.form.test.id);
+    });
+};
+
+function describeConditional(inputElement){
+    it('label', () => {
+        data.form.test.type = inputElement;
+        data.form.test.inputType = 'text';
+        data.form.test.label = '';
+        createForm(data);
+
+        expect(vm.$el.querySelectorAll('label')).to.be.length(0);
+    });
+};
+
 describe('Bootstrap Field Inputs', () => {
 
-    beforeEach(() => {
+    beforeEach(() => {        
         data = {
             form: {
                 test: {
@@ -41,107 +168,21 @@ describe('Bootstrap Field Inputs', () => {
         };
     });
 
-    describe('functions', () => {
-
-        beforeEach(() => {
-            data.form.test.type = 'input';
-            data.form.test.inputType = 'text';
-            spy = sinon.spy();
+    describe('=== Input ===', () => {
+        
+        describe('functions',() =>{
+            describeFunctions('input');
         });
-
-        it('dirty/active', () => {
-            createForm();
-            expect(vm.form.test.$dirty).to.be.false;
-            expect(vm.form.test.$active).to.be.false;
+        describe('classes & attributes', () => {
+            describeAttributes('input');
         });
-
-        it('blur', () => {
-            let copy = {};
-            data.form.test.onBlur = function(e){
-                copy = this.form;
-            };
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'blur');
-            expect(vm.form.test.$active).to.be.false;
-            expect(vm.form.test.$dirty).to.be.true;
-            //check that "this" is the same
-            //the deep equal of "this" seemed to time out
-            expect(copy).to.deep.equal(vm.form);
+        describe('conditional elements', ()=>{
+            describeConditional('input');
         });
         
-        it('focus', () => {
-            data.form.test.onFocus = spy;
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'focus');
-            expect(spy.called).to.be.true;
-            expect(vm.form.test.$active).to.be.true;
-        });
-
-        it('click', () => {
-            data.form.test.onClick = spy;
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'click');
-            expect(spy.called).to.be.true;
-        });
-
-        it('change', () => {
-            data.form.test.onChange = spy;
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'change');
-            expect(spy.called).to.be.true;
-            expect(vm.form.test.$dirty).to.be.true;           
-        });
-
-        it('keyup', () => {
-            data.form.test.onKeyup = spy;
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'keyup');
-            expect(spy.called).to.be.true;
-        });
-
-        it('keydown', () => {
-            data.form.test.onKeydown = spy;
-            createForm();
-            trigger(vm.$el.querySelectorAll('input')[0], 'keydown');
-            expect(spy.called).to.be.true;
-        });
-        
-    });
-
-    describe('classes & attributes', () => {
-        it('attributes', () => {
+        it('layout', (done) => {
             data.form.test.type = 'input';
             data.form.test.inputType = 'text';
-            data.form.test.atts = {
-                'data-foo': 'bar',
-                'data-bar': 'foo'
-            };
-            createForm();
-            let input = vm.$el.querySelectorAll('input')[0];
-            expect(input.dataset.foo).to.equal('bar');
-            expect(input.dataset.bar).to.equal('foo');
-        });
-
-        it('classes', () => {
-            data.form.test.type = 'input';
-            data.form.test.inputType = 'text';
-            data.form.test.classes = {
-                'class-a': true,
-                'class-b': false
-            };
-            createForm();
-            let input = vm.$el.querySelectorAll('input')[0];
-            expect(input.className).to.equal('form-control class-a');
-        });
-    });
-
-    describe('input', () => {
-
-        it('basic functions', (done) => {
-            data.form.test.type = 'input';
-            data.form.test.inputType = 'text';
-            data.form.test.placeholder = 'holding';
-            data.form.test.id = 'someId';
             createForm(data);
 
             let inputs = vm.$el.querySelectorAll('input');
@@ -151,13 +192,10 @@ describe('Bootstrap Field Inputs', () => {
 
             expect(inputs).to.be.length(1);
             expect(input.type).to.equal('text');
-            expect(input.id).to.equal(data.form.test.id);
-            expect(input.placeholder).to.equal('holding');
             expect(input.className).to.equal('form-control');
             
             expect(labels).to.be.length(1);
             expect(label.textContent).to.equal(data.form.test.label);
-            expect(label.htmlFor).to.equal(data.form.test.id);
 
             vm.form.test.value = 'testing';
 
@@ -167,17 +205,21 @@ describe('Bootstrap Field Inputs', () => {
             }, 0);
             
         });
+    });
 
-        it('conditional elements', () => {
-            data.form.test.type = 'input';
-            data.form.test.inputType = 'text';
-            data.form.test.label = '';
-            delete data.form.test.placeholder;
-            createForm(data);
 
-            expect(vm.$el.querySelectorAll('label')).to.be.length(0);
+
+    describe('=== Select ===', () => {
+        describe('functions', ()=>{
+            describeFunctions('select');
         });
-
+        describe('classes & attributes', () => {
+            describeAttributes('select', ['placeholder']);
+        });
+        describe('conditional elements', ()=>{
+            describeConditional('select');
+        });
+         
     });
 
     
