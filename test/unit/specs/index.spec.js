@@ -30,10 +30,11 @@ function trigger (target, event, process) {
     target.dispatchEvent(e);
 }
 
-function describeFunctions(inputElement){
+function describeFunctions(formlyElement, inputElement, inputType = 'text', options){
     beforeEach(() => {
-        data.form.test.type = inputElement;
-        data.form.test.inputType = 'text';
+        data.form.test.type = formlyElement;
+        data.form.test.inputType = inputType;
+        if ( typeof options != 'undefined' ) data.form.test.options = options;
         spy = sinon.spy();
     });
 
@@ -168,7 +169,7 @@ describe('Bootstrap Field Inputs', () => {
     describe('Input', () => {
         
         describe('functions',() =>{
-            describeFunctions('input');
+            describeFunctions('input', 'input');
         });
         describe('classes & attributes', () => {
             describeAttributes('input');
@@ -215,7 +216,7 @@ describe('Bootstrap Field Inputs', () => {
 
     describe('Select', () => {
         describe('functions', ()=>{
-            describeFunctions('select');
+            describeFunctions('select', 'select');
         });
         describe('classes & attributes', () => {
             describeAttributes('select', false);
@@ -263,7 +264,7 @@ describe('Bootstrap Field Inputs', () => {
 
     describe('Textarea', () => {
         describe('functions', ()=>{
-            describeFunctions('textarea');
+            describeFunctions('textarea', 'textarea');
         });
         describe('classes & attributes', () => {
             describeAttributes('textarea');
@@ -280,6 +281,117 @@ describe('Bootstrap Field Inputs', () => {
             let input = inputs[0];
 
             expect(inputs).to.be.length(1);
+        });
+    });
+
+    describe("List", () => {
+        describe('checkbox functions', ()=>{
+            describeFunctions('list', 'input', 'checkbox', ['one']);
+        });
+        describe('classes & attributes', () => {
+            /*
+            it('classes', () => {
+                data.form.test.classes = {
+                    'class-a': true,
+                    'class-b': false
+                };
+                createForm();
+                let input = vm.$el.querySelectorAll(inputElement)[0];
+                expect(input.className).to.equal('form-control class-a');
+            });
+
+            it('id', () => {
+                data.form.test.id = 'someId';
+                createForm();
+                let input = vm.$el.querySelectorAll(inputElement)[0];
+                let label = vm.$el.querySelectorAll('label')[0];
+                expect(input.id).to.equal(data.form.test.id);
+                expect(label.htmlFor).to.equal(data.form.test.id);
+            });
+             */
+        });
+
+        it('array options', () => {
+            data.form.test.type = 'list';
+            data.form.test.inputType = 'checkbox';
+            data.form.test.options = ['one', 'two', 'three'];
+            createForm();
+
+            let inputs = vm.$el.querySelectorAll('input');
+            let labels = vm.$el.querySelectorAll('label');
+            expect(inputs).to.be.length(3);
+            expect(inputs[0].value).to.equal('one');
+            expect(labels[0].textContent).to.contain('one');
+            expect(inputs[1].value).to.equal('two');
+            expect(labels[1].textContent).to.contain('two');            
+        });
+
+        it('object options', () => {
+            data.form.test.type = 'list';
+            data.form.test.inputType = 'checkbox'
+            data.form.test.options = [
+                { label: 'Foo', value: 'bar' },
+                { label: 'Bar', value: 'foo' }
+            ];
+            createForm();
+
+            let inputs = vm.$el.querySelectorAll('input');
+            let labels = vm.$el.querySelectorAll('label');
+            expect(inputs).to.be.length(2);
+            expect(inputs[0].value).to.equal('bar');
+            expect(labels[0].textContent).to.contain('Foo');
+            expect(inputs[1].value).to.equal('foo');
+            expect(labels[1].textContent).to.contain('Bar');            
+        });
+
+        it('sets defaults', () => {
+            data.form.test.type = 'list';
+            data.form.test.options = ['one', 'two'];
+            createForm();
+
+            expect(vm.$el.querySelectorAll('input')[0].type).to.equal('checkbox');
+            expect(vm.form.test.value).to.be.length(0);
+            expect(vm.form.test.value).to.deep.equal([]);
+        });
+
+        it("shouldn't overwrite defaults", () => {
+            data.form.test.type = 'list';
+            data.form.test.options = ['one', 'two'];
+            data.form.test.value = ['one'];
+            createForm();
+
+            expect(vm.form.test.value).to.be.length(1);
+            expect(vm.form.test.value[0]).to.equal('one');
+        });
+
+        it('multiple values', (done) => {
+            data.form.test.type = 'list';
+            data.form.test.inputType = 'checkbox';
+            data.form.test.options = ['one', 'two'];
+            createForm();
+
+            vm.form.test.value = ['one', 'two'];
+            setTimeout(()=>{
+                let inputs = vm.$el.querySelectorAll('input');
+                expect(inputs[0].checked).to.be.true;
+                expect(inputs[1].checked).to.be.true;
+                done();
+            }, 0);
+        });
+
+        it('single value', (done) => {
+            data.form.test.type = 'list';
+            data.form.test.inputType = 'radio';
+            data.form.test.options = ['one', 'two'];
+            createForm();
+
+            vm.form.test.value = 'two';
+            setTimeout(()=>{
+                let inputs = vm.$el.querySelectorAll('input');
+                expect(inputs[0].checked).to.be.false;
+                expect(inputs[1].checked).to.be.true;
+                done();
+            }, 0);            
         });
     });
     

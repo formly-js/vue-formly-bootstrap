@@ -90,19 +90,24 @@ These options are used by all the different field types. Some fields may have sp
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}] |
 
+###List options
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}] |
+| inputType | `string` | `checkbox` | The 'type' attribute to pass to each input. Can be either 'checkbox' or 'radio' | 
+
 ##Available Inputs
 * input
 * select
 * textarea
-* checkbox
-* radio
+* list ( radio/checkbox )
 
 ##To Do
 * [x] Input
 * [x] Select
 * [x] Text Area
-* [ ] Checkbox
-* [ ] Radio Buttons
+* [x] Checkbox
+* [x] Radio Buttons
 * [ ] Date Picker
 * [ ] Other funky form inputs
 * [x] Dirty/Clean checking
