@@ -110,3 +110,4 @@ These options are used by all the different field types. Some fields may have sp
 * [x] Custom attributes
 * [x] Custom Classes
 * [x] Custom events
+* [ ] Handle errors & error classes
