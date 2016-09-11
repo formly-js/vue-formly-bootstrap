@@ -1,5 +1,5 @@
 #vue-formly-bootstrap
-A plugin for [Vue Formly](https://github.com/matt-sanders/vue-formly) which adds multiple form fields according to Twitter Bootstrap.
+A plugin for [Vue Formly](https://github.com/matt-sanders/vue-formly) which adds multiple form fields according to Twitter Bootstrap. 
 
 ##Installation
 ```
@@ -7,7 +7,9 @@ npm install vue-formly-bootstrap
 ```
 or if you can just include the script:
 ```html
-<script src="/path_to_folder/vue-formly-bootstrap/dist/vue-formly-bootstrap.js"></script>
+<link rel="stylesheet" href="/path_to_bootstrap.css"/>
+<script src="/path_to_bootstrap.js"></script>
+<script src="/path_to_folder/vue-formly-bootstrap/dist/vue-formly-bootstrap.min.js"></script>
 ```
 
 ##Usage
@@ -50,7 +52,9 @@ let vm = new Vue({
 ```
 If you include the script it will be installed for you.
 
-Note that this is still a work in progress so some fields are under construction. See the To Do section for what's on the watchlist.
+For more advanced details about how to use Vue Formly check out the [docs](https://www.gitbook.com/book/matt-sanders/vue-formly/details).
+
+Note that this is still a work in progress so some fields are under construction. See the [To Do](#to-do) section for what's on the watchlist.
 
 ##Options
 
@@ -61,6 +65,7 @@ These options are used by all the different field types. Some fields may have sp
 | --- | --- | --- | --- |
 | $dirty | `boolean` | `false` | ***RESTRICTED*** This is set by the system and is just there for your reference. It gets set to `true` upon blur or change, whichever happens first. |
 | $active | `boolean` | `false` | ***RESTRICTED*** Also set by the system and is set to true on focus. |
+| type | `string` | `null` | ***REQUIRED*** this is the input type. Check the [Available Inputs](#available-inputs) section for a list of currently available inputs.
 | onBlur | `function(e)` | `null` | A function to run on @blur event |
 | onFocus | `function(e)` | `null` | A function to run on @focus event |
 | onClick | `function(e)` | `null` | A function to run on @click event |
@@ -84,6 +89,13 @@ These options are used by all the different field types. Some fields may have sp
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}] |
+
+##Available Inputs
+* input
+* select
+* textarea
+* checkbox
+* radio
 
 ##To Do
 * [x] Input
