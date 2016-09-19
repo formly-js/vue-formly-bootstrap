@@ -201,6 +201,23 @@ describe('Bootstrap Field Inputs', () => {
             
         });
 
+        it('adds active and focus classes', (done) => {
+            data.form.test.type = 'input';
+            data.form.test.inputType = 'text';
+            createForm(data);
+
+            expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(0);
+            expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(0);
+
+            trigger(vm.$el.querySelectorAll('input')[0], 'focus');
+            data.form.test.value = 'test';
+            setTimeout(()=>{
+                expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(1);
+                expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(1);
+                done();
+            },0);
+        });
+
         it('defaults to text', () => {
             data.form.test.type = 'input';
             data.form.test.inputType = '';
