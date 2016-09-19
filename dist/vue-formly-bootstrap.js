@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v0.4.0
+ * vue-formly-bootstrap v1.0.1
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -738,7 +738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 41 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group\">\n  <label v-if=\"form[key].label\" :for=\"form[key].id ? form[key].id : null\">{{form[key].label}}</label>\n  <input class=\"form-control\" :class=\"form[key].classes\" :id=\"form[key].id ? form[key].id : null\" :type=\"form[key].inputType || text\" v-model=\"form[key].value\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"form[key].atts\">\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-input\" :class=\"{'formly-has-value': form[key].value, 'formly-has-focus': form[key].$active}\">\n  <label v-if=\"form[key].label\" :for=\"form[key].id ? form[key].id : null\">{{form[key].label}}</label>\n  <input class=\"form-control\" :class=\"form[key].classes\" :id=\"form[key].id ? form[key].id : null\" :type=\"form[key].inputType || text\" v-model=\"form[key].value\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"form[key].atts\">\n</div>\n";
 
 /***/ },
 /* 42 */
