@@ -8,6 +8,13 @@
 <script>
  import baseField from './baseField';
  export default {
-     mixins: [baseField]
+     mixins: [baseField],
+     methods: {
+         onChange: function(e){
+             if ( this.form[key].inputType == 'file' ){
+                 this.$set('form.'+this.key+'.files', this.$el.querySelector('input').files);
+             }
+         }
+     }
  }
 </script>

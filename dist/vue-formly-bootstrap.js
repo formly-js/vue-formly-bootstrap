@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v1.0.1
+ * vue-formly-bootstrap v1.0.3
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -687,7 +687,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	    mixins: [_baseField2.default]
+	    mixins: [_baseField2.default],
+	    methods: {
+	        onChange: function onChange(e) {
+	            if (this.form[key].inputType == 'file') {
+	                this.$set('form.' + this.key + '.files', this.$el.querySelector('input').files);
+	            }
+	        }
+	    }
 	};
 
 /***/ },
@@ -828,7 +835,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 46 */
-39,
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _baseField = __webpack_require__(40);
+
+	var _baseField2 = _interopRequireDefault(_baseField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    mixins: [_baseField2.default]
+	};
+
+/***/ },
 /* 47 */
 /***/ function(module, exports) {
 
@@ -864,7 +889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 49 */
-39,
+46,
 /* 50 */
 /***/ function(module, exports) {
 
