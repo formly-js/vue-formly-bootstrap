@@ -11,7 +11,9 @@
      mixins: [baseField],
      methods: {
          onChange: function(e){
-             if ( this.form[key].inputType == 'file' ){
+             this.$set('form.'+this.key+'.$dirty', true);
+             this.runFunction('onChange', e);
+             if ( this.form[this.key].inputType == 'file' ){
                  this.$set('form.'+this.key+'.files', this.$el.querySelector('input').files);
              }
          }
