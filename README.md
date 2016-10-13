@@ -82,6 +82,7 @@ These options are used by all the different field types. Some fields may have sp
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | inputType | `string` | `text` | The 'type' attribute to pass to the input. |
+| files | `Object` | `null` | ***RESTRICTED*** If you have set `inputType` to equal `file` then the `files` parameter will be populated by VueFormly to contain the corresponding files that have been uploaded |
 
 
 ###Select options
