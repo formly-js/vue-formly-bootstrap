@@ -1,6 +1,6 @@
 {
   "name": "vue-formly-bootstrap",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A bootstrap based form input bundle for Vue Formly",
   "main": "dist/vue-formly-bootstrap.js",
   "scripts": {

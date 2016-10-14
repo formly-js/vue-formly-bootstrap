@@ -173,6 +173,14 @@ describe('Bootstrap Field Inputs', () => {
         });
         describe('classes & attributes', () => {
             describeAttributes('input');
+            it('should have input type as a class', () => {
+                data.form.test.type = 'input';
+                data.form.test.inputType = 'text';
+                createForm(data);
+
+                let els = vm.$el.querySelectorAll('.text');
+                expect(els).to.be.length(1);
+            });
         });
         describe('conditional elements', ()=>{
             describeConditional('input');
