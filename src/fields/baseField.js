@@ -18,19 +18,19 @@ export default
       if ( typeof this.to[action] == 'function' ) this.to[action].call(this, e);
     },
     onFocus: function(e){
-      this.$set('form.'+this.field.key+'.$active', true);
+      this.$set(this.form[this.field.key], '$active', true);
       this.runFunction('onFocus', e);
     },
     onBlur: function(e){
-      this.$set('form.'+this.field.key+'.$dirty', true);
-      this.$set('form.'+this.field.key+'.$active', false);
+      this.$set(this.form[this.field.key], '$dirty', true);
+      this.$set(this.form[this.field.key], '$active', false);
       this.runFunction('onBlur', e);
     },
     onClick: function(e){
       this.runFunction('onClick', e);
     },
     onChange: function(e){
-      this.$set('form.'+this.field.key+'.$dirty', true);
+      this.$set(this.form[this.field.key], '$dirty', true);
       this.runFunction('onChange', e);
     },
     onKeyup: function(e){
