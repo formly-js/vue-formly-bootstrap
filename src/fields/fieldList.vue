@@ -1,8 +1,8 @@
 <template>
-  <div class="checkbox" :id="form[key].id" :class="form[key].classes">
+  <div class="checkbox formly-list" :id="to.id" :class="to.classes">
 
-    <label v-for="option in form[key].options">
-      <input :type="form[key].inputType || 'checkbox'" v-model="form[key].value" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="form[key].atts"> {{option.label || option}}
+    <label v-for="option in field.options">
+      <input type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts" v-formly-input-type="to.type"> {{option.label || option}}
     </label>
     
   </div>
@@ -14,8 +14,8 @@
      mixins: [baseField],
      created: function(){
          //set the default value to be an array if it's a checkbox
-         let type = this.form[this.key].inputType;
-         if ( (!type || type == 'checkbox') && this.form[this.key].value == '') this.$set('form.'+this.key+'.value', []);
+         let type = this.to.type;
+         if ( (!type || type == 'checkbox') && this.model[ this.field.key ] == '') this.$set(this.model, this.field.key, []);
      }
  }
 </script>

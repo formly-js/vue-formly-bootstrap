@@ -250,6 +250,16 @@ describe('Bootstrap Field Inputs', () => {
       let input = inputs[0];
       expect(input.type).to.equal('text');
     });
+
+    it('supports other input types', () => {
+      data.fields[0].type = 'input';
+      data.fields[0].templateOptions.type = 'password';
+      createForm(data);
+
+      let inputs = vm.$el.querySelectorAll('input');
+      let input = inputs[0];
+      expect(input.type).to.equal('password');
+    });
     
   });
   
@@ -322,117 +332,119 @@ describe('Bootstrap Field Inputs', () => {
       expect(inputs).to.be.length(1);
     });
   });
-  /*
-     describe("List", () => {
-     describe('checkbox functions', ()=>{
-     describeFunctions('list', 'input', 'checkbox', ['one']);
-     });
-     describe('classes & attributes', () => {
-     /*
-     it('classes', () => {
-     data.form.test.classes = {
-     'class-a': true,
-     'class-b': false
-     };
-     createForm();
-     let input = vm.$el.querySelectorAll(inputElement)[0];
-     expect(input.className).to.equal('form-control class-a');
-     });
+  
+  describe("List", () => {
+    describe('checkbox functions', ()=>{
+      describeFunctions('list', 'input', 'checkbox', ['one']);
+    });
+    describe('classes & attributes', () => {
+      /*
+      it('classes', () => {
+        data.fields[0].classes = {
+          'class-a': true,
+          'class-b': false
+        };
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        expect(input.className).to.equal('form-control class-a');
+      });
 
-     it('id', () => {
-     data.form.test.id = 'someId';
-     createForm();
-     let input = vm.$el.querySelectorAll(inputElement)[0];
-     let label = vm.$el.querySelectorAll('label')[0];
-     expect(input.id).to.equal(data.form.test.id);
-     expect(label.htmlFor).to.equal(data.form.test.id);
-     });
-   */
-  /*
-     });
+      it('id', () => {
+        data.fields[0].id = 'someId';
+        createForm();
+        let input = vm.$el.querySelectorAll(inputElement)[0];
+        let label = vm.$el.querySelectorAll('label')[0];
+        expect(input.id).to.equal(data.fields[0].id);
+        expect(label.htmlFor).to.equal(data.fields[0].id);
+      });
+      */
+      
+    });
 
-     it('array options', () => {
-     data.form.test.type = 'list';
-     data.form.test.inputType = 'checkbox';
-     data.form.test.options = ['one', 'two', 'three'];
-     createForm();
+    it('array options', () => {
+      data.fields[0].type = 'list';
+      data.fields[0].templateOptions.type = 'checkbox';
+      data.fields[0].options = ['one', 'two', 'three'];
+      createForm();
 
-     let inputs = vm.$el.querySelectorAll('input');
-     let labels = vm.$el.querySelectorAll('label');
-     expect(inputs).to.be.length(3);
-     expect(inputs[0].value).to.equal('one');
-     expect(labels[0].textContent).to.contain('one');
-     expect(inputs[1].value).to.equal('two');
-     expect(labels[1].textContent).to.contain('two');            
-     });
+      let inputs = vm.$el.querySelectorAll('input');
+      let labels = vm.$el.querySelectorAll('label');
+      expect(inputs).to.be.length(3);
+      expect(inputs[0].value).to.equal('one');
+      expect(labels[0].textContent).to.contain('one');
+      expect(inputs[1].value).to.equal('two');
+      expect(labels[1].textContent).to.contain('two');            
+    });
 
-     it('object options', () => {
-     data.form.test.type = 'list';
-     data.form.test.inputType = 'checkbox'
-     data.form.test.options = [
-     { label: 'Foo', value: 'bar' },
-     { label: 'Bar', value: 'foo' }
-     ];
-     createForm();
+    it('object options', () => {
+      data.fields[0].type = 'list';
+      data.fields[0].templateOptions.type = 'checkbox'
+      data.fields[0].options = [
+        { label: 'Foo', value: 'bar' },
+        { label: 'Bar', value: 'foo' }
+      ];
+      createForm();
 
-     let inputs = vm.$el.querySelectorAll('input');
-     let labels = vm.$el.querySelectorAll('label');
-     expect(inputs).to.be.length(2);
-     expect(inputs[0].value).to.equal('bar');
-     expect(labels[0].textContent).to.contain('Foo');
-     expect(inputs[1].value).to.equal('foo');
-     expect(labels[1].textContent).to.contain('Bar');            
-     });
+      let inputs = vm.$el.querySelectorAll('input');
+      let labels = vm.$el.querySelectorAll('label');
+      expect(inputs).to.be.length(2);
+      expect(inputs[0].value).to.equal('bar');
+      expect(labels[0].textContent).to.contain('Foo');
+      expect(inputs[1].value).to.equal('foo');
+      expect(labels[1].textContent).to.contain('Bar');            
+    });
 
-     it('sets defaults', () => {
-     data.form.test.type = 'list';
-     data.form.test.options = ['one', 'two'];
-     createForm();
+    it('sets defaults', () => {
+      data.fields[0].type = 'list';
+      data.fields[0].options = ['one', 'two'];
+      createForm();
 
-     expect(vm.$el.querySelectorAll('input')[0].type).to.equal('checkbox');
-     expect(vm.form.test.value).to.be.length(0);
-     expect(vm.form.test.value).to.deep.equal([]);
-     });
+      expect(vm.$el.querySelectorAll('input')[0].type).to.equal('checkbox');
+      expect(vm.model.test).to.be.length(0);
+      expect(vm.model.test).to.deep.equal([]);
+    });
 
-     it("shouldn't overwrite defaults", () => {
-     data.form.test.type = 'list';
-     data.form.test.options = ['one', 'two'];
-     data.form.test.value = ['one'];
-     createForm();
+    it("shouldn't overwrite defaults", () => {
+      data.fields[0].type = 'list';
+      data.fields[0].options = ['one', 'two'];
+      data.model.test = ['one'];
+      createForm();
 
-     expect(vm.form.test.value).to.be.length(1);
-     expect(vm.form.test.value[0]).to.equal('one');
-     });
+      expect(vm.model.test).to.be.length(1);
+      expect(vm.model.test[0]).to.equal('one');
+      let inputs = vm.$el.querySelectorAll('input');
+      expect(inputs[0].checked).to.be.true;
+    });
 
-     it('multiple values', (done) => {
-     data.form.test.type = 'list';
-     data.form.test.inputType = 'checkbox';
-     data.form.test.options = ['one', 'two'];
-     createForm();
+    it('multiple values', (done) => {
+      data.fields[0].type = 'list';
+      data.fields[0].templateOptions.type = 'checkbox';
+      data.fields[0].options = ['one', 'two'];
+      createForm();
 
-     vm.form.test.value = ['one', 'two'];
-     setTimeout(()=>{
-     let inputs = vm.$el.querySelectorAll('input');
-     expect(inputs[0].checked).to.be.true;
-     expect(inputs[1].checked).to.be.true;
-     done();
-     }, 0);
-     });
+      vm.model.test = ['one', 'two'];
+      setTimeout(()=>{
+        let inputs = vm.$el.querySelectorAll('input');
+        expect(inputs[0].checked).to.be.true;
+        expect(inputs[1].checked).to.be.true;
+        done();
+      }, 0);
+    });
 
-     it('single value', (done) => {
-     data.form.test.type = 'list';
-     data.form.test.inputType = 'radio';
-     data.form.test.options = ['one', 'two'];
-     createForm();
+    it('single value', (done) => {
+      data.fields[0].type = 'list';
+      data.fields[0].templateOptions.type = 'radio';
+      data.fields[0].options = ['one', 'two'];
+      createForm();
 
-     vm.form.test.value = 'two';
-     setTimeout(()=>{
-     let inputs = vm.$el.querySelectorAll('input');
-     expect(inputs[0].checked).to.be.false;
-     expect(inputs[1].checked).to.be.true;
-     done();
-     }, 0);            
-     });
-     });
-   */
+      vm.model.test = 'two';
+      setTimeout(()=>{
+        let inputs = vm.$el.querySelectorAll('input');
+        expect(inputs[0].checked).to.be.false;
+        expect(inputs[1].checked).to.be.true;
+        done();
+      }, 0);            
+    });
+  });
+  
 });
