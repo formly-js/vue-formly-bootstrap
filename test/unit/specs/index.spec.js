@@ -252,58 +252,55 @@ describe('Bootstrap Field Inputs', () => {
     });
     
   });
+  
+  describe('Select', () => {
+    describe('functions', ()=>{
+      describeFunctions('select', 'select');
+    });
+    describe('classes & attributes', () => {
+      describeAttributes('select', false);
+    });
+    describe('conditional elements', ()=>{
+      describeConditional('select');
+    });
 
+    it('layout', () => {
+      data.fields[0].type = 'select';
+      createForm(data);
 
+      let inputs = vm.$el.querySelectorAll('select');
+      let input = inputs[0];
 
-  /*
-     describe('Select', () => {
-     describe('functions', ()=>{
-     describeFunctions('select', 'select');
-     });
-     describe('classes & attributes', () => {
-     describeAttributes('select', false);
-     });
-     describe('conditional elements', ()=>{
-     describeConditional('select');
-     });
+      expect(inputs).to.be.length(1);
+    });
 
-     it('layout', () => {
-     data.form.test.type = 'select';
-     createForm(data);
+    it('array options', () => {
+      data.fields[0].type = 'select';
+      data.fields[0].options = ['one', 'two', 'three'];
+      createForm();
+      let options = vm.$el.querySelectorAll('option');
+      let option = options[0];
+      expect(options).to.be.length(3);
+      expect(option.value).to.equal('one');
+      expect(option.innerHTML).to.equal('one');
+    });
 
-     let inputs = vm.$el.querySelectorAll('select');
-     let input = inputs[0];
-
-     expect(inputs).to.be.length(1);
-     });
-
-     it('array options', () => {
-     data.form.test.type = 'select';
-     data.form.test.options = ['one', 'two', 'three'];
-     createForm();
-     let options = vm.$el.querySelectorAll('option');
-     let option = options[0];
-     expect(options).to.be.length(3);
-     expect(option.value).to.equal('one');
-     expect(option.innerHTML).to.equal('one');
-     });
-
-     it('object options', () => {
-     data.form.test.type = 'select';
-     data.form.test.options = [
-     { label: 'Foo', value: 'bar' },
-     { label: 'Bar', value: 'foo' }
-     ];
-     createForm();
-     let options = vm.$el.querySelectorAll('option');
-     let option = options[0];
-     expect(options).to.be.length(2);
-     expect(option.value).to.equal('bar');
-     expect(option.innerHTML).to.equal('Foo');
-     });
-     
-     });
-
+    it('object options', () => {
+      data.fields[0].type = 'select';
+      data.fields[0].options = [
+        { label: 'Foo', value: 'bar' },
+        { label: 'Bar', value: 'foo' }
+      ];
+      createForm();
+      let options = vm.$el.querySelectorAll('option');
+      let option = options[0];
+      expect(options).to.be.length(2);
+      expect(option.value).to.equal('bar');
+      expect(option.innerHTML).to.equal('Foo');
+    });
+    
+  });
+/*
      describe('Textarea', () => {
      describe('functions', ()=>{
      describeFunctions('textarea', 'textarea');
