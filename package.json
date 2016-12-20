@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matt-sanders/vue-formly-bootstrap.git"
+    "url": "git+https://github.com/formly-js/vue-formly-bootstrap.git"
   },
   "keywords": [
     "vue",
@@ -18,9 +18,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matt-sanders/vue-formly-bootstrap/issues"
+    "url": "https://github.com/formly-js/vue-formly-bootstrap/issues"
   },
-  "homepage": "https://github.com/matt-sanders/vue-formly-bootstrap#readme",
+  "homepage": "https://github.com/formly-js/vue-formly-bootstrap#readme",
+  "peerDependencies": {
+    "vue-formly": "2.x"
+  },
   "devDependencies": {
     "babel-core": "6.11.4",
     "babel-loader": "6.2.4",
@@ -71,7 +74,8 @@
     "sinon-chai": "2.8.0",
     "style-loader": "0.13.1",
     "uglify-js": "^2.6.4",
-    "vue": "1.0.26",
+    "vue" : "~2.0.0",
+    "vue-formly": "~2.0.0",
     "vue-hot-reload-api": "1.3.2",
     "vue-html-loader": "1.2.3",
     "vue-loader": "8.5.3",
