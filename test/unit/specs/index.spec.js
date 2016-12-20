@@ -300,29 +300,29 @@ describe('Bootstrap Field Inputs', () => {
     });
     
   });
-/*
-     describe('Textarea', () => {
-     describe('functions', ()=>{
-     describeFunctions('textarea', 'textarea');
-     });
-     describe('classes & attributes', () => {
-     describeAttributes('textarea');
-     });
-     describe('conditional elements', ()=>{
-     describeConditional('textarea');
-     });
 
-     it('layout', () => {
-     data.form.test.type = 'textarea';
-     createForm();
+  describe('Textarea', () => {
+    describe('functions', ()=>{
+      describeFunctions('textarea', 'textarea');
+    });
+    describe('classes & attributes', () => {
+      describeAttributes('textarea');
+    });
+    describe('conditional elements', ()=>{
+      describeConditional('textarea');
+    });
 
-     let inputs = vm.$el.querySelectorAll('textarea');
-     let input = inputs[0];
+    it('layout', () => {
+      data.fields[0].type = 'textarea';
+      createForm();
 
-     expect(inputs).to.be.length(1);
-     });
-     });
+      let inputs = vm.$el.querySelectorAll('textarea');
+      let input = inputs[0];
 
+      expect(inputs).to.be.length(1);
+    });
+  });
+  /*
      describe("List", () => {
      describe('checkbox functions', ()=>{
      describeFunctions('list', 'input', 'checkbox', ['one']);
