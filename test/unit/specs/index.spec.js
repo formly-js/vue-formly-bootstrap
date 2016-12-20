@@ -102,12 +102,12 @@ function describeFunctions(formlyElement, inputElement, inputType = 'text', opti
 
 function describeAttributes(inputElement, testPlaceholder = true){
   beforeEach(()=>{
-    data.form.test.type = inputElement;
-    data.form.test.inputType = 'text';
+    data.fields[0].type = inputElement;
+    data.fields[0].templateOptions.type = 'text';
   });
   
   it('attributes', () => {
-    data.form.test.atts = {
+    data.fields[0].templateOptions.atts = {
       'data-foo': 'bar',
       'data-bar': 'foo',
       'placeholder': 'holding'
@@ -120,7 +120,7 @@ function describeAttributes(inputElement, testPlaceholder = true){
   });
 
   it('classes', () => {
-    data.form.test.classes = {
+    data.fields[0].templateOptions.classes = {
       'class-a': true,
       'class-b': false
     };
@@ -130,25 +130,25 @@ function describeAttributes(inputElement, testPlaceholder = true){
   });
 
   it('id', () => {
-    data.form.test.id = 'someId';
+    data.fields[0].templateOptions.id = 'someId';
     createForm();
     let input = vm.$el.querySelectorAll(inputElement)[0];
     let label = vm.$el.querySelectorAll('label')[0];
-    expect(input.id).to.equal(data.form.test.id);
-    expect(label.htmlFor).to.equal(data.form.test.id);
+    expect(input.id).to.equal(data.fields[0].templateOptions.id);
+    expect(label.htmlFor).to.equal(data.fields[0].templateOptions.id);
   });
 };
 
 function describeConditional(inputElement){
   it('label', (done) => {
-    data.form.test.type = inputElement;
-    data.form.test.inputType = 'text';
-    data.form.test.label = '';
+    data.fields[0].type = inputElement;
+    data.fields[0].templateOptions.type = 'text';
+    data.fields[0].templateOptions.label = '';
     createForm(data);
 
     expect(vm.$el.querySelectorAll('label')).to.be.length(0);
 
-    vm.form.test.label = 'testing';
+    vm.fields[0].templateOptions.label = 'testing';
 
     setTimeout(()=>{
       expect(vm.$el.querySelectorAll('label')).to.be.length(1);
@@ -184,7 +184,7 @@ describe('Bootstrap Field Inputs', () => {
     });
     
     describe('classes & attributes', () => {
-      //describeAttributes('input');
+      describeAttributes('input');
       it('should have input type as a class', () => {
         data.fields[0].type = 'input';
         data.fields[0].templateOptions.type = 'text';
@@ -195,61 +195,62 @@ describe('Bootstrap Field Inputs', () => {
       });
     });
     
-    /*
-       describe('conditional elements', ()=>{
-       describeConditional('input');
-       });
-       
-       it('layout', (done) => {
-       data.form.test.type = 'input';
-       data.form.test.inputType = 'text';
-       createForm(data);
+    
+    describe('conditional elements', ()=>{
+      describeConditional('input');
+    });
+    
+    
+    it('layout', (done) => {
+      data.fields[0].type = 'input';
+      data.fields[0].templateOptions.type = 'text';
+      createForm(data);
 
-       let inputs = vm.$el.querySelectorAll('input');
-       let input = inputs[0];
-       let labels = vm.$el.querySelectorAll('label');
-       let label = labels[0];
+      let inputs = vm.$el.querySelectorAll('input');
+      let input = inputs[0];
+      let labels = vm.$el.querySelectorAll('label');
+      let label = labels[0];
 
-       expect(inputs).to.be.length(1);
-       expect(input.type).to.equal('text');
-       expect(input.className).to.equal('form-control');
+      expect(inputs).to.be.length(1);
+      expect(input.type).to.equal('text');
+      expect(input.className).to.equal('form-control');
 
-       vm.form.test.value = 'testing';
+      vm.model.test = 'testing';
 
-       setTimeout(() => {
-       expect(vm.$el.querySelectorAll('input')[0].value).to.equal('testing');
-       done();
-       }, 0);
-       
-       });
+      setTimeout(() => {
+        expect(vm.$el.querySelectorAll('input')[0].value).to.equal('testing');
+        done();
+      }, 0);
+      
+    });
+    
+    it('adds active and focus classes', (done) => {
+      data.fields[0].type = 'input';
+      data.fields[0].templateOptions.type = 'text';
+      createForm(data);
 
-       it('adds active and focus classes', (done) => {
-       data.form.test.type = 'input';
-       data.form.test.inputType = 'text';
-       createForm(data);
+      expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(0);
+      expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(0);
 
-       expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(0);
-       expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(0);
+      trigger(vm.$el.querySelectorAll('input')[0], 'focus');
+      data.model.test = 'test';
+      setTimeout(()=>{
+        expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(1);
+        expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(1);
+        done();
+      },0);
+    });
 
-       trigger(vm.$el.querySelectorAll('input')[0], 'focus');
-       data.form.test.value = 'test';
-       setTimeout(()=>{
-       expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(1);
-       expect(vm.$el.querySelectorAll('.formly-has-value')).to.be.length(1);
-       done();
-       },0);
-       });
+    it('defaults to text', () => {
+      data.fields[0].type = 'input';
+      data.fields[0].templateOptions.type = undefined;
+      createForm(data);
 
-       it('defaults to text', () => {
-       data.form.test.type = 'input';
-       data.form.test.inputType = '';
-       createForm(data);
-
-       let inputs = vm.$el.querySelectorAll('input');
-       let input = inputs[0];
-       expect(input.type).to.equal('text');
-       });
-     */
+      let inputs = vm.$el.querySelectorAll('input');
+      let input = inputs[0];
+      expect(input.type).to.equal('text');
+    });
+    
   });
 
 
