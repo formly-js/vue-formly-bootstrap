@@ -2,7 +2,9 @@
   <div class="checkbox formly-list" :id="to.id" :class="to.classes">
 
     <label v-for="option in field.options">
-      <input type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts" v-formly-input-type="to.type"> {{option.label || option}}
+      <input v-if="!to.type || to.type == 'checkbox'" type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
+      <input v-if="to.type == 'radio'" type="radio" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
+      {{option.label || option}}
     </label>
     
   </div>
