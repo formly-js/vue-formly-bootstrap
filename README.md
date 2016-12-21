@@ -74,6 +74,7 @@ Note that this is still a work in progress so some fields are under construction
 The form object is used to track the state of the form. Whether it is valid or not, whether there are any errors etc. The following attributes will be set under each field key. e.g. if you had a field with the key of `name` you could access these under `form.name`
 
 | Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
 | $dirty | `boolean` | `false` | ***RESTRICTED*** This is set by the system and is just there for your reference. It gets set to `true` upon blur or change, whichever happens first. |
 | $active | `boolean` | `false` | ***RESTRICTED*** Also set by the system and is set to true on focus. |
 
@@ -101,6 +102,7 @@ These options are used by all the different field types. Some fields may have sp
 These should be added to the `templateOptions` property. Some input types may have specific options which can be used here and will be specified below.
 
 | Property | Type | Default | Description |
+| --- | --- | --- | --- |
 | onBlur | `function(e)` | `null` | A function to run on @blur event |
 | onFocus | `function(e)` | `null` | A function to run on @focus event |
 | onClick | `function(e)` | `null` | A function to run on @click event |
