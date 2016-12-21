@@ -1,9 +1,12 @@
 #vue-formly-bootstrap
 A plugin for [Vue Formly](https://github.com/matt-sanders/vue-formly) which adds multiple form fields according to Twitter Bootstrap. 
 
+##Version 1
+Note that this is version 1 of Vue Formly Bootstrap, compatible	with Vue Formly	1 and Vue 1. If	you are	looking	for version 2 compatibility check out the [Master Branch](https://github.com/formly-js/vue-formly-bootstrap).
+
 ##Installation
 ```
-npm install vue-formly-bootstrap
+npm install vue-formly-bootstrap@"^1.0.0"
 ```
 or if you can just include the script:
 ```html
