@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v1.0.5
+ * vue-formly-bootstrap v2.0.0
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -819,7 +819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"to.classes\">\n\n  <label v-for=\"option in field.options\">\n    <input type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.type\"> {{option.label || option}}\n  </label>\n  \n</div>\n";
+	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"to.classes\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.type || to.type == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.type == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  \n</div>\n";
 
 /***/ },
 /* 45 */
