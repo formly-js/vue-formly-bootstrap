@@ -253,7 +253,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('supports other input types', () => {
       data.fields[0].type = 'input';
-      data.fields[0].templateOptions.type = 'password';
+      data.fields[0].templateOptions.inputType = 'password';
       createForm(data);
 
       let inputs = vm.$el.querySelectorAll('input');

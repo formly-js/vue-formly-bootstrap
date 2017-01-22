@@ -110,6 +110,7 @@ These should be added to the `templateOptions` property. Some input types may ha
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
+| label | `string` | `null` | A string containing the field label |
 | onBlur | `function(e)` | `null` | A function to run on @blur event |
 | onFocus | `function(e)` | `null` | A function to run on @focus event |
 | onClick | `function(e)` | `null` | A function to run on @click event |
@@ -124,7 +125,7 @@ These should be added to the `templateOptions` property. Some input types may ha
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| type | `string` | `text` | The 'type' attribute to pass to the input. Can be any valid input type. |
+| inputType | `string` | `text` | The 'type' attribute to pass to the input. Can be any valid input type. |
 
 ####List options
 
