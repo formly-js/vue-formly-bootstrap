@@ -35,18 +35,25 @@ let vm = new Vue({
          {
             key: 'name',
             type: 'input',
-            label: 'Your name'
+            templateOptions: {
+               label: 'Your name'
+            }
          },
          {
             key: 'sex',
             type: 'select',
-            label: 'Sex',
-            options: ['Male', 'Female']
+            options: ['Male', 'Female'],            
+            templateOptions: {
+               label: 'Sex'
+            }
+
          },
          {
             key: 'comments',
             type: 'textarea',
-            label: 'Comments'
+            templateOptions: {
+               label: 'Comments'
+            }
          }
       ]
    },
