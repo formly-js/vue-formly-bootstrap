@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v2.0.1
+ * vue-formly-bootstrap v2.0.2
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
