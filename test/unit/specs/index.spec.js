@@ -33,7 +33,7 @@ function trigger (target, event, process) {
 function describeFunctions(formlyElement, inputElement, inputType = 'text', options){
   beforeEach(() => {
     data.fields[0].type = formlyElement;
-    data.fields[0].templateOptions.type = inputType;
+    data.fields[0].templateOptions.inputType = inputType;
     if ( typeof options != 'undefined' ) data.fields[0].options = options;
     spy = sinon.spy();
   });
@@ -103,7 +103,7 @@ function describeFunctions(formlyElement, inputElement, inputType = 'text', opti
 function describeAttributes(inputElement, testPlaceholder = true){
   beforeEach(()=>{
     data.fields[0].type = inputElement;
-    data.fields[0].templateOptions.type = 'text';
+    data.fields[0].templateOptions.inputType = 'text';
   });
   
   it('attributes', () => {
@@ -142,7 +142,7 @@ function describeAttributes(inputElement, testPlaceholder = true){
 function describeConditional(inputElement){
   it('label', (done) => {
     data.fields[0].type = inputElement;
-    data.fields[0].templateOptions.type = 'text';
+    data.fields[0].templateOptions.inputType = 'text';
     data.fields[0].templateOptions.label = '';
     createForm(data);
 
@@ -187,7 +187,7 @@ describe('Bootstrap Field Inputs', () => {
       describeAttributes('input');
       it('should have input type as a class', () => {
         data.fields[0].type = 'input';
-        data.fields[0].templateOptions.type = 'text';
+        data.fields[0].templateOptions.inputType = 'text';
         createForm(data);
 
         let els = vm.$el.querySelectorAll('.text');
@@ -203,7 +203,7 @@ describe('Bootstrap Field Inputs', () => {
     
     it('layout', (done) => {
       data.fields[0].type = 'input';
-      data.fields[0].templateOptions.type = 'text';
+      data.fields[0].templateOptions.inputType = 'text';
       createForm(data);
 
       let inputs = vm.$el.querySelectorAll('input');
@@ -226,7 +226,7 @@ describe('Bootstrap Field Inputs', () => {
     
     it('adds active and focus classes', (done) => {
       data.fields[0].type = 'input';
-      data.fields[0].templateOptions.type = 'text';
+      data.fields[0].templateOptions.inputType = 'text';
       createForm(data);
 
       expect(vm.$el.querySelectorAll('.formly-has-focus')).to.be.length(0);
@@ -243,7 +243,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('defaults to text', () => {
       data.fields[0].type = 'input';
-      data.fields[0].templateOptions.type = undefined;
+      data.fields[0].templateOptions.inputType = undefined;
       createForm(data);
 
       let inputs = vm.$el.querySelectorAll('input');
@@ -363,7 +363,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('array options', () => {
       data.fields[0].type = 'list';
-      data.fields[0].templateOptions.type = 'checkbox';
+      data.fields[0].templateOptions.inputType = 'checkbox';
       data.fields[0].options = ['one', 'two', 'three'];
       createForm();
 
@@ -378,7 +378,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('object options', () => {
       data.fields[0].type = 'list';
-      data.fields[0].templateOptions.type = 'checkbox'
+      data.fields[0].templateOptions.inputType = 'checkbox'
       data.fields[0].options = [
         { label: 'Foo', value: 'bar' },
         { label: 'Bar', value: 'foo' }
@@ -418,7 +418,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('multiple values', (done) => {
       data.fields[0].type = 'list';
-      data.fields[0].templateOptions.type = 'checkbox';
+      data.fields[0].templateOptions.inputType = 'checkbox';
       data.fields[0].options = ['one', 'two'];
       createForm();
 
@@ -433,7 +433,7 @@ describe('Bootstrap Field Inputs', () => {
 
     it('single value', (done) => {
       data.fields[0].type = 'list';
-      data.fields[0].templateOptions.type = 'radio';
+      data.fields[0].templateOptions.inputType = 'radio';
       data.fields[0].options = ['one', 'two'];
       createForm();
 

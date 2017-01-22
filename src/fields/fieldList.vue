@@ -2,8 +2,8 @@
   <div class="checkbox formly-list" :id="to.id" :class="to.classes">
 
     <label v-for="option in field.options">
-      <input v-if="!to.type || to.type == 'checkbox'" type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
-      <input v-if="to.type == 'radio'" type="radio" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
+      <input v-if="!to.inputType || to.inputType == 'checkbox'" type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
+      <input v-if="to.inputType == 'radio'" type="radio" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">
       {{option.label || option}}
     </label>
     
@@ -16,7 +16,7 @@
      mixins: [baseField],
      created: function(){
          //set the default value to be an array if it's a checkbox
-         let type = this.to.type;
+         let type = this.to.inputType;
          if ( (!type || type == 'checkbox') && this.model[ this.field.key ] == '') this.$set(this.model, this.field.key, []);
      }
  }
