@@ -48,9 +48,11 @@ let vm = new Vue({
 ```
 ```html
 <div id="el">
-   <formly-form :form="form" @submit="doSomething">
-      <button>Submit</button>
-   </formly-form>
+   <form @submit="doSomething">
+      <formly-form :form="form">
+         <button>Submit</button>
+      </formly-form>
+   </form>
 </div>
 ```
 If you include the script it will be installed for you.
