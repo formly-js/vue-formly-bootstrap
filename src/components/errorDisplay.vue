@@ -8,7 +8,7 @@
    computed: {
      message(){
        let message = false;
-       if ( !( this.field in this.form.$errors ) ) return message;
+       if ( !( this.field in this.form.$errors ) || this.form[ this.field ].$active || !this.form[this.field].$dirty ) return message;
        let errors = this.form.$errors[ this.field ];
        Object.keys( errors ).some( errorKey => {
          if ( typeof errors[ errorKey ] != 'boolean' ){
