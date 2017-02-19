@@ -1,3 +1,4 @@
+import errorDisplay from '../components/errorDisplay.vue';
 export default
 {
   props: [
@@ -49,10 +50,13 @@ export default
       let errors = this.form.$errors[ this.field.key ];
       let hasErrors = false;
       Object.keys( errors ).forEach( err => {
-        if ( errors[err] ) hasErrors = true; 
+        if ( errors[err] !== false ) hasErrors = true; 
       });
       this.$set(this.form[ this.field.key ], '$hasError', hasErrors);
       return hasErrors;
     }
+  },
+  components: {
+    'error-display': errorDisplay
   }
 };

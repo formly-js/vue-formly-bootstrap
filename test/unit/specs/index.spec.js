@@ -178,7 +178,7 @@ describe('Bootstrap Field Inputs', () => {
   });
 
   describe('Errors', () => {
-    it('should receive an error state', () => {
+    it('should receive an error state', (done) => {
       data.fields[0].type = 'input';
       data.fields[0].required = true;
       createForm();
@@ -189,7 +189,14 @@ describe('Bootstrap Field Inputs', () => {
       expect(data.form['test'].$active).to.be.true;
       
       trigger(vm.$el.querySelectorAll('input')[0], 'change');
-      expect(data.form['test'].$hasError).to.be.false;
+      trigger(vm.$el.querySelectorAll('input')[0], 'blur');
+      expect(data.form['test'].$dirty).to.be.true;
+      expect(data.form['test'].$active).to.be.false;
+      setTimeout( () => {
+        expect(data.form['test'].$hasError).to.be.true;
+        expect(vm.$el.querySelectorAll('.has-error')).to.be.length(1);
+        done();
+      }, 0);
     });
   });
 
