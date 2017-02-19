@@ -28,6 +28,10 @@ describe("errorDisplay.vue", () => {
           test: {
             foo: 'This is a test'
           }
+        },
+        test: {
+          '$active': false,
+          '$dirty': true
         }
       },
       key: 'test'
@@ -47,6 +51,10 @@ describe("errorDisplay.vue", () => {
             bar: 'This is a test',
             foobar: 'testing'
           }
+        },
+        test: {
+          '$active': false,
+          '$dirty': true
         }
       },
       key: 'test'
@@ -65,6 +73,10 @@ describe("errorDisplay.vue", () => {
           test: {
             foo: false
           }
+        },
+        test: {
+          '$active': false,
+          '$dirty': true
         }
       },
       key: 'test'
