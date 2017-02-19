@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v2.0.1
+ * vue-formly-bootstrap v2.0.2
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -703,7 +703,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.$set(this.form[this.field.key], '$dirty', true);
 	      this.runFunction('onChange', e);
-	      if (this.to.type == 'file') {
+	      if (this.to.inputType == 'file') {
 	        this.$set(this.model, this.field.key, this.$el.querySelector('input').files);
 	      }
 	    }
@@ -761,7 +761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 41 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.type, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n</div>\n";
 
 /***/ },
 /* 42 */
@@ -810,7 +810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 	    mixins: [_baseField2.default],
 	    created: function created() {
-	        var type = this.to.type;
+	        var type = this.to.inputType;
 	        if ((!type || type == 'checkbox') && this.model[this.field.key] == '') this.$set(this.model, this.field.key, []);
 	    }
 	};
@@ -819,7 +819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"to.classes\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.type || to.type == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.type == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  \n</div>\n";
+	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"to.classes\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.inputType || to.inputType == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.inputType == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  \n</div>\n";
 
 /***/ },
 /* 45 */

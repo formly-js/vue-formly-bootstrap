@@ -15,7 +15,7 @@
        
        this.$set(this.form[this.field.key], '$dirty', true);
        this.runFunction('onChange', e);
-       if ( this.to.type == 'file' ){
+       if ( this.to.inputType == 'file' ){
          this.$set(this.model, this.field.key, this.$el.querySelector('input').files);
        }
        
