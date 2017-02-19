@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v2.0.2
+ * vue-formly-bootstrap v2.2.0
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -634,9 +634,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var map = {
 		"./fieldInput.vue": 38,
-		"./fieldList.vue": 42,
-		"./fieldSelect.vue": 45,
-		"./fieldTextarea.vue": 48
+		"./fieldList.vue": 45,
+		"./fieldSelect.vue": 48,
+		"./fieldTextarea.vue": 51
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -662,7 +662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/fields/fieldInput.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(41)
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -712,19 +712,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 40 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _keys = __webpack_require__(2);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _errorDisplay = __webpack_require__(41);
+
+	var _errorDisplay2 = _interopRequireDefault(_errorDisplay);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = {
 	  props: ['form', 'field', 'model', 'to'],
 	  created: function created() {
 	    var state = {
 	      '$dirty': false,
-	      '$active': false
+	      '$active': false,
+	      '$hasError': false
 	    };
 	    this.$set(this.form, this.field.key, state);
 	  },
@@ -754,26 +766,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onKeydown: function onKeydown(e) {
 	      this.runFunction('onKeydown', e);
 	    }
+	  },
+	  computed: {
+	    hasError: function hasError() {
+	      if (this.form[this.field.key].$dirty == false || this.form[this.field.key].$active == true) {
+	        return false;
+	      }
+	      var errors = this.form.$errors[this.field.key];
+	      var hasErrors = false;
+	      (0, _keys2.default)(errors).forEach(function (err) {
+	        if (errors[err] !== false) hasErrors = true;
+	      });
+	      this.$set(this.form[this.field.key], '$hasError', hasErrors);
+	      return hasErrors;
+	    }
+	  },
+	  components: {
+	    'error-display': _errorDisplay2.default
 	  }
 	};
 
 /***/ },
 /* 41 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n</div>\n";
-
-/***/ },
-/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(43)
+	__vue_script__ = __webpack_require__(42)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/fields/fieldList.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(44)
+	  console.warn("[vue-loader] src/components/errorDisplay.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(43)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -783,7 +806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-487ea4ea/fieldList.vue"
+	  var id = "_v-54a3409b/errorDisplay.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -792,34 +815,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	})()}
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
-	var _baseField = __webpack_require__(40);
+	var _keys = __webpack_require__(2);
 
-	var _baseField2 = _interopRequireDefault(_baseField);
+	var _keys2 = _interopRequireDefault(_keys);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	    mixins: [_baseField2.default],
-	    created: function created() {
-	        var type = this.to.inputType;
-	        if ((!type || type == 'checkbox') && this.model[this.field.key] == '') this.$set(this.model, this.field.key, []);
+	  props: ['field', 'form'],
+	  computed: {
+	    message: function message() {
+	      var message = false;
+	      if (!(this.field in this.form.$errors) || !(this.field in this.form) || this.form[this.field].$active || !this.form[this.field].$dirty) return message;
+	      var errors = this.form.$errors[this.field];
+	      (0, _keys2.default)(errors).some(function (errorKey) {
+	        if (typeof errors[errorKey] != 'boolean') {
+	          message = errors[errorKey];
+	          return true;
+	        }
+	      });
+	      return message;
 	    }
+	  }
 	};
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<span v-if=\"message\" class=\"help-block\">{{message}}</span>\n";
 
 /***/ },
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"to.classes\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.inputType || to.inputType == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.inputType == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  \n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ },
 /* 45 */
@@ -830,7 +869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/fields/fieldSelect.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/fields/fieldList.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(47)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -841,7 +880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-2c2f2570/fieldSelect.vue"
+	  var id = "_v-487ea4ea/fieldList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -866,14 +905,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	    mixins: [_baseField2.default]
+	    mixins: [_baseField2.default],
+	    created: function created() {
+	        var type = this.to.inputType;
+	        if ((!type || type == 'checkbox') && this.model[this.field.key] == '') this.$set(this.model, this.field.key, []);
+	    }
 	};
 
 /***/ },
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-select\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <select class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <option v-for=\"option in field.options\" :value=\"option.value || option\">{{option.label || option}}</option>\n  </select>\n</div>\n";
+	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"[to.classes, {'has-error': hasError}]\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.inputType || to.inputType == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.inputType == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ },
 /* 48 */
@@ -884,8 +927,62 @@ return /******/ (function(modules) { // webpackBootstrap
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/fields/fieldTextarea.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/fields/fieldSelect.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(50)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-2c2f2570/fieldSelect.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _baseField = __webpack_require__(40);
+
+	var _baseField2 = _interopRequireDefault(_baseField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    mixins: [_baseField2.default]
+	};
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"form-group formly-select\" :class=\"{'has-error': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <select class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <option v-for=\"option in field.options\" :value=\"option.value || option\">{{option.label || option}}</option>\n  </select>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(52)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/fields/fieldTextarea.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(53)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -904,12 +1001,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	})()}
 
 /***/ },
-/* 49 */
-46,
-/* 50 */
+/* 52 */
+49,
+/* 53 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-textarea\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <textarea class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\"></textarea>\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-textarea\" :class=\"{'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <textarea class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\"></textarea>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ }
 /******/ ])))
