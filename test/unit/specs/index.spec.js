@@ -177,6 +177,29 @@ describe('Bootstrap Field Inputs', () => {
     };
   });
 
+  describe('Errors', () => {
+    it('should receive an error state', (done) => {
+      data.fields[0].type = 'input';
+      data.fields[0].required = true;
+      createForm();
+
+      expect(data.form['test'].$hasError).to.be.false;
+      trigger(vm.$el.querySelectorAll('input')[0], 'focus');
+      expect(data.form['test'].$hasError).to.be.false;
+      expect(data.form['test'].$active).to.be.true;
+      
+      trigger(vm.$el.querySelectorAll('input')[0], 'change');
+      trigger(vm.$el.querySelectorAll('input')[0], 'blur');
+      expect(data.form['test'].$dirty).to.be.true;
+      expect(data.form['test'].$active).to.be.false;
+      setTimeout( () => {
+        expect(data.form['test'].$hasError).to.be.true;
+        expect(vm.$el.querySelectorAll('.has-error')).to.be.length(1);
+        done();
+      }, 0);
+    });
+  });
+
   describe('Input', () => {
     
     describe('functions',() =>{
@@ -445,6 +468,28 @@ describe('Bootstrap Field Inputs', () => {
         done();
       }, 0);            
     });
+
+    it('only shows a checkbox', () => {
+      data.fields[0].type = 'list';
+      data.fields[0].options = ['one', 'two'];
+      createForm();
+      let inputs = vm.$el.querySelectorAll('input');
+      expect(inputs).to.be.length(2);
+      expect(inputs[0].type).to.equal('checkbox');
+      expect(inputs[1].type).to.equal('checkbox');
+    });
+    
+    it('only shows a radio box', () => {
+      data.fields[0].type = 'list';
+      data.fields[0].templateOptions.inputType = 'radio';
+      data.fields[0].options = ['one', 'two'];
+      createForm();
+      let inputs = vm.$el.querySelectorAll('input');
+      expect(inputs).to.be.length(2);
+      expect(inputs[0].type).to.equal('radio');
+      expect(inputs[1].type).to.equal('radio');
+    });
+    
   });
   
 });

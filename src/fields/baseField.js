@@ -1,3 +1,4 @@
+import errorDisplay from '../components/errorDisplay.vue';
 export default
 {
   props: [
@@ -9,7 +10,8 @@ export default
   created: function(){
     let state = {
       '$dirty': false,
-      '$active': false
+      '$active': false,
+      '$hasError': false
     };
     this.$set(this.form, this.field.key, state);
   },
@@ -39,5 +41,22 @@ export default
     onKeydown: function(e){
       this.runFunction('onKeydown', e);
     }        
+  },
+  computed: {
+    hasError: function(){
+      if ( this.form[ this.field.key ].$dirty == false || this.form[ this.field.key ].$active == true ) {
+        return false;
+      }
+      let errors = this.form.$errors[ this.field.key ];
+      let hasErrors = false;
+      Object.keys( errors ).forEach( err => {
+        if ( errors[err] !== false ) hasErrors = true; 
+      });
+      this.$set(this.form[ this.field.key ], '$hasError', hasErrors);
+      return hasErrors;
+    }
+  },
+  components: {
+    'error-display': errorDisplay
   }
 };
