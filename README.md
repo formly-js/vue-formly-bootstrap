@@ -154,4 +154,4 @@ These should be added to the `templateOptions` property. Some input types may ha
 * [x] Custom attributes
 * [x] Custom Classes
 * [x] Custom events
-* [ ] Handle errors & error classes
+* [x] Handle errors & error classes
