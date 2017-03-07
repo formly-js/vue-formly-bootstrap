@@ -105,7 +105,6 @@ These options are used by all the different field types. Some fields may have sp
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}]` |
-| inputType | `string` | `checkbox` | The 'type' attribute to pass to each input. Can be either 'checkbox' or 'radio' | 
 
 ###Template Options
 These should be added to the `templateOptions` property. Some input types may have specific options which can be used here and will be specified below.
