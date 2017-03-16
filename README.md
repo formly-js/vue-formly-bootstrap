@@ -141,14 +141,47 @@ These should be added to the `templateOptions` property. Some input types may ha
 * textarea
 * list ( radio/checkbox )
 
+###Datepickers & Select2 style selects
+Given that there are so many different datepickers and select boxes out there I've decided not to implement one natively. This is a) to reduce bloat and b) so that you can implement whichever one you want. When you do want to add one, simply [create your own Formly Field](https://matt-sanders.gitbooks.io/vue-formly/content/v/2.0/how_to_use/creating_formly_fields.html).
+
+To help you out a bit, here is an example of how you would go about doing this using [vuejs datepicker](https://github.com/charliekassel/vuejs-datepicker)
+
+```js
+//main.js
+...
+import datepicker from './components/datepicker.vue';
+vueFormly.addType('datepicker', datepicker);
+```
+
+```js
+//datepicker.vue
+<template>
+<div class="form-group formly-datepicker" :class="[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}]">
+<datepicker v-model="model[field.key]"></datepicker>
+<error-display :form="form" :field="field.key"></error-display>
+</div>
+</template>
+
+<script>
+import baseField from 'vue-formly-bootstrap/src/fields/baseField';
+import datepicker from 'vuejs-datepicker';
+export default {
+mixins: [baseField],
+components: {
+datepicker
+}
+}
+</script>
+```
+
 ##To Do
 * [x] Input
 * [x] Select
 * [x] Text Area
 * [x] Checkbox
 * [x] Radio Buttons
-* [ ] Date Picker
-* [ ] Other funky form inputs
+* [x] Date Picker
+* [x] Other funky form inputs
 * [x] Dirty/Clean checking
 * [ ] Hide/Show options
 * [x] Custom attributes
