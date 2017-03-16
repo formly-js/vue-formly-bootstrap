@@ -1,10 +1,10 @@
-#vue-formly-bootstrap
+# vue-formly-bootstrap
 A plugin for [Vue Formly](https://github.com/matt-sanders/vue-formly) which adds multiple form fields according to Twitter Bootstrap.
 
-##Version 2
+## Version 2
 Note that this is version 2 of Vue Formly Bootstrap, compatible with Vue Formly 2 and Vue 2. If you are looking for version 1 compatibility check out the [Version 1 Branch](https://github.com/formly-js/vue-formly-bootstrap/tree/1.0).
 
-##Installation
+## Installation
 ```
 npm install vue-formly-bootstrap
 ```
@@ -15,7 +15,7 @@ or if you can just include the script:
 <script src="/path_to_folder/vue-formly-bootstrap/dist/vue-formly-bootstrap.min.js"></script>
 ```
 
-##Usage
+## Usage
 ```js
 import VueFormly from 'vue-formly';
 import VueFormlyBootstrap from 'vue-formly-bootstrap';
@@ -77,9 +77,9 @@ For more advanced details about how to use Vue Formly check out the [docs](https
 
 Note that this is still a work in progress so some fields are under construction. See the [To Do](#to-do) section for what's on the watchlist.
 
-##Options & Attributes
+## Options & Attributes
 
-###Form Attributes
+### Form Attributes
 The form object is used to track the state of the form. Whether it is valid or not, whether there are any errors etc. The following attributes will be set under each field key. e.g. if you had a field with the key of `name` you could access these under `form.name`
 
 | Attribute | Type | Default | Description |
@@ -87,26 +87,26 @@ The form object is used to track the state of the form. Whether it is valid or n
 | $dirty | `boolean` | `false` | ***RESTRICTED*** This is set by the system and is just there for your reference. It gets set to `true` upon blur or change, whichever happens first. |
 | $active | `boolean` | `false` | ***RESTRICTED*** Also set by the system and is set to true on focus. |
 
-###Global options
+### Global options
 These options are used by all the different field types. Some fields may have special options and these will be specified below. Check the [Vue Formly docs](https://matt-sanders.gitbooks.io/vue-formly/content/v/2.0/) for more info.
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | type | `string` | `null` | ***REQUIRED*** this is the input type. Check the [Available Inputs](#available-inputs) section for a list of currently available inputs.
 
-####Select options
+#### Select options
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}]` |
 
-####List options
+#### List options
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}]` |
 
-###Template Options
+### Template Options
 These should be added to the `templateOptions` property. Some input types may have specific options which can be used here and will be specified below.
 
 | Property | Type | Default | Description |
@@ -122,26 +122,26 @@ These should be added to the `templateOptions` property. Some input types may ha
 | classes | `object` | `null` | Pass an object of classes to be added to the element. Follows the Vue bindings where each key matches a boolean value. eg `{ 'class-a': true, 'class-b': false }` In this case class-a will be attached. |
 | id | `string` | `null` | An ID string to attach to the element |
 
-####Input options
+#### Input options
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | inputType | `string` | `text` | The 'type' attribute to pass to the input. Can be any valid input type. |
 
-####List options
+#### List options
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | inputType | `string` | `checkbox` | The 'type' attribute to pass to each input. Can be either 'checkbox' or 'radio' | 
 
 
-##Available Inputs
+## Available Inputs
 * input
 * select
 * textarea
 * list ( radio/checkbox )
 
-###Datepickers & Select2 style selects
+### Datepickers & Select2 style selects
 Given that there are so many different datepickers and select boxes out there I've decided not to implement one natively. This is a) to reduce bloat and b) so that you can implement whichever one you want. When you do want to add one, simply [create your own Formly Field](https://matt-sanders.gitbooks.io/vue-formly/content/v/2.0/how_to_use/creating_formly_fields.html).
 
 To help you out a bit, here is an example of how you would go about doing this using [vuejs datepicker](https://github.com/charliekassel/vuejs-datepicker)
@@ -156,20 +156,20 @@ vueFormly.addType('datepicker', datepicker);
 ```js
 //datepicker.vue
 <template>
-<div class="form-group formly-datepicker" :class="[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}]">
-<datepicker v-model="model[field.key]"></datepicker>
-<error-display :form="form" :field="field.key"></error-display>
-</div>
+   <div class="form-group formly-datepicker" :class="[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}]">
+      <datepicker v-model="model[field.key]"></datepicker>
+      <error-display :form="form" :field="field.key"></error-display>
+   </div>
 </template>
 
 <script>
 import baseField from 'vue-formly-bootstrap/src/fields/baseField';
 import datepicker from 'vuejs-datepicker';
 export default {
-mixins: [baseField],
-components: {
-datepicker
-}
+   mixins: [baseField],
+   components: {
+      datepicker
+   }
 }
 </script>
 ```
