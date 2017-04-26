@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v2.2.1
+ * vue-formly-bootstrap v2.2.2
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -852,7 +852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 43 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<span v-if=\"message\" class=\"help-block\">{{message}}</span>\n";
+	module.exports = "\n<span v-if=\"message\" class=\"help-block form-text text-danger\">{{message}}</span>\n";
 
 /***/ },
 /* 44 */
