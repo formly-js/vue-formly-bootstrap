@@ -1,5 +1,5 @@
 <template>
-  <div class="checkbox formly-list" :id="to.id" :class="[to.classes, {'has-error': hasError}]">
+  <div class="checkbox formly-list" :id="to.id" :class="[to.classes, {'has-error has-danger': hasError}]">
 
     <label v-for="option in field.options">
       <input v-if="!to.inputType || to.inputType == 'checkbox'" type="checkbox" v-model="model[field.key]" :value="option.value || option" @blur="onBlur" @focus="onFocus" @click="onClick" @change="onChange" @keyup="onKeyup" @keydown="onKeydown" v-formly-atts="to.atts">

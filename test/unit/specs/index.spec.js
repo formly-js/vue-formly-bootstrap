@@ -195,6 +195,7 @@ describe('Bootstrap Field Inputs', () => {
       setTimeout( () => {
         expect(data.form['test'].$hasError).to.be.true;
         expect(vm.$el.querySelectorAll('.has-error')).to.be.length(1);
+	expect(vm.$el.querySelectorAll('.has-danger')).to.be.length(1);
         done();
       }, 0);
     });
