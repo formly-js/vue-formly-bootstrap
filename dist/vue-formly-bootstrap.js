@@ -1,5 +1,5 @@
 /**
- * vue-formly-bootstrap v2.2.0
+ * vue-formly-bootstrap v2.2.1
  * https://github.com/matt-sanders/vue-formly-bootstrap
  * Released under the MIT License.
  */
@@ -672,7 +672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-78aa6b2e/fieldInput.vue"
+	  var id = "_v-06093aa8/fieldInput.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -806,7 +806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-54a3409b/errorDisplay.vue"
+	  var id = "_v-43230c95/errorDisplay.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -858,7 +858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-input\" :class=\"[ to.inputType, {'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error has-danger': hasError}]\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <input class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" type=\"text\"  v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\" v-formly-input-type=\"to.inputType\">\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ },
 /* 45 */
@@ -880,7 +880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-487ea4ea/fieldList.vue"
+	  var id = "_v-7eaa03a0/fieldList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -916,7 +916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"[to.classes, {'has-error': hasError}]\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.inputType || to.inputType == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.inputType == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
+	module.exports = "\n<div class=\"checkbox formly-list\" :id=\"to.id\" :class=\"[to.classes, {'has-error has-danger': hasError}]\">\n\n  <label v-for=\"option in field.options\">\n    <input v-if=\"!to.inputType || to.inputType == 'checkbox'\" type=\"checkbox\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <input v-if=\"to.inputType == 'radio'\" type=\"radio\" v-model=\"model[field.key]\" :value=\"option.value || option\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    {{option.label || option}}\n  </label>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ },
 /* 48 */
@@ -938,7 +938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-2c2f2570/fieldSelect.vue"
+	  var id = "_v-08638d0e/fieldSelect.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -970,7 +970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 50 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-select\" :class=\"{'has-error': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <select class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <option v-for=\"option in field.options\" :value=\"option.value || option\">{{option.label || option}}</option>\n  </select>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-select\" :class=\"{'has-error has-danger': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <select class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\">\n    <option v-for=\"option in field.options\" :value=\"option.value || option\">{{option.label || option}}</option>\n  </select>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ },
 /* 51 */
@@ -992,7 +992,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-5fab8386/fieldTextarea.vue"
+	  var id = "_v-68446c68/fieldTextarea.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -1006,7 +1006,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 53 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"form-group formly-textarea\" :class=\"{'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <textarea class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\"></textarea>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
+	module.exports = "\n<div class=\"form-group formly-textarea\" :class=\"{'formly-has-value': model[field.key], 'formly-has-focus': form[field.key].$active, 'has-error has-danger': hasError}\">\n  <label v-if=\"to.label\" :for=\"to.id ? to.id : null\">{{to.label}}</label>\n  <textarea class=\"form-control\" :class=\"to.classes\" :id=\"to.id ? to.id : null\" v-model=\"model[field.key]\" @blur=\"onBlur\" @focus=\"onFocus\" @click=\"onClick\" @change=\"onChange\" @keyup=\"onKeyup\" @keydown=\"onKeydown\" v-formly-atts=\"to.atts\"></textarea>\n  <error-display :form=\"form\" :field=\"field.key\"></error-display>\n</div>\n";
 
 /***/ }
 /******/ ])))
