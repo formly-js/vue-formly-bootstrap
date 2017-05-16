@@ -120,6 +120,7 @@ function describeAttributes(inputElement, testPlaceholder = true){
   });
 
   it('classes', () => {
+    data.fields[0].templateOptions.wrapperClasses = ['foo', 'bar'];
     data.fields[0].templateOptions.classes = {
       'class-a': true,
       'class-b': false
@@ -127,6 +128,12 @@ function describeAttributes(inputElement, testPlaceholder = true){
     createForm();
     let input = vm.$el.querySelectorAll(inputElement)[0];
     expect(input.className).to.equal('form-control class-a');
+
+    let foos = vm.$el.querySelectorAll('.foo');
+    expect(foos).to.be.length(1);
+
+    let fooBars = vm.$el.querySelectorAll('.bar.foo');
+    expect(fooBars).to.be.length(1);
   });
 
   it('id', () => {

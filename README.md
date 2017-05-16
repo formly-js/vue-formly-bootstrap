@@ -105,6 +105,7 @@ These options are used by all the different field types. Some fields may have sp
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | `array` | `null` | Pass either an array of strings or objects. Objects require a `label` and `value` property. If a string is passed then it will be used for the value and the label. eg: `options: ['Foo', 'Bar']` or `options: [{ label: 'Foo', value: 'bar'},{label: 'Bar', value: 'foo'}]` |
+| labelClasses | `object` | `null` | Pass an object of classes to be added to the label surrounding the element. Follows the Vue bindings where each key matches a boolean value. eg `{ 'class-a': true, 'class-b': false }` In this case class-a will be attached. You may also pass an array. |
 
 ### Template Options
 These should be added to the `templateOptions` property. Some input types may have specific options which can be used here and will be specified below.
@@ -119,7 +120,8 @@ These should be added to the `templateOptions` property. Some input types may ha
 | onKeyup | `function(e)` | `null` | A function to run on @keyup event |
 | onKeydown | `function(e)` | `null` | A function to run on @keydown event |
 | atts | `object` | `null` | Pass an object of attributes to be added to the element. eg `{ placeholder: 'hello world' }` |
-| classes | `object` | `null` | Pass an object of classes to be added to the element. Follows the Vue bindings where each key matches a boolean value. eg `{ 'class-a': true, 'class-b': false }` In this case class-a will be attached. |
+| classes | `object` | `null` | Pass an object of classes to be added to the element. Follows the Vue bindings where each key matches a boolean value. eg `{ 'class-a': true, 'class-b': false }` In this case class-a will be attached. You may also pass an array |
+| wrapperClasses | `object` | `null` | Pass an object of classes to be added to the wrapper. Follows the Vue bindings where each key matches a boolean value. eg `{ 'class-a': true, 'class-b': false }` In this case class-a will be attached. You may also pass an array |
 | id | `string` | `null` | An ID string to attach to the element |
 
 #### Input options
