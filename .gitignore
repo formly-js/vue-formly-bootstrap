@@ -12,3 +12,4 @@ flycheck_*.el
 node_modules/
 coverage/
 test/unit/coverage
+package-lock.json
