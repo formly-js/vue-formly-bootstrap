@@ -400,11 +400,12 @@ describe('Bootstrap Field Inputs', () => {
 
       let inputs = vm.$el.querySelectorAll('input');
       let labels = vm.$el.querySelectorAll('label');
+      expect(labels[0].textContent).to.contain('test');
       expect(inputs).to.be.length(3);
       expect(inputs[0].value).to.equal('one');
-      expect(labels[0].textContent).to.contain('one');
+      expect(labels[1].textContent).to.contain('one');
       expect(inputs[1].value).to.equal('two');
-      expect(labels[1].textContent).to.contain('two');            
+      expect(labels[2].textContent).to.contain('two');            
     });
 
     it('object options', () => {
@@ -418,11 +419,12 @@ describe('Bootstrap Field Inputs', () => {
 
       let inputs = vm.$el.querySelectorAll('input');
       let labels = vm.$el.querySelectorAll('label');
+      expect(labels[0].textContent).to.contain('test');
       expect(inputs).to.be.length(2);
       expect(inputs[0].value).to.equal('bar');
-      expect(labels[0].textContent).to.contain('Foo');
+      expect(labels[1].textContent).to.contain('Foo');
       expect(inputs[1].value).to.equal('foo');
-      expect(labels[1].textContent).to.contain('Bar');            
+      expect(labels[2].textContent).to.contain('Bar');            
     });
 
     it('sets defaults', () => {
