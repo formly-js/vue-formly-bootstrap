@@ -1,4 +1,4 @@
-import errorDisplay from '../components/errorDisplay.vue';
+import errorDisplay from '../components/errorDisplay';
 export default
 {
   props: [
