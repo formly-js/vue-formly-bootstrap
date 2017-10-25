@@ -26,11 +26,11 @@ export default {
 	  ...this.to.classes
 	},
 	domProps: {
-	  value: self.value
+	  value: this.model[ this.field.key ]
 	},
 	on: {
 	  input(event){
-	    self.value = event.target.value;
+	    self.model[ self.field.key ] = event.target.value;
 	    self.$emit('input', event.target.value);
 	  },
 	  blur: this.onBlur,
