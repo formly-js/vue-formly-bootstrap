@@ -17,7 +17,15 @@ function createForm(){
   //el.innerHTML = '<formly-form :form="form" :model="model" :fields="fields"></formly-form>';
   vm = new Vue({
     data: data,
-    template: '<formly-form :form="form" :model="model" :fields="fields"></formly-form>'
+    render(h){
+      return h('formly-form', {
+	props: {
+	  form: this.form,
+	  fields: this.fields,
+	  model: this.model
+	}
+      });
+    }
   }).$mount(el);
 
   return [el, vm];
@@ -226,7 +234,6 @@ describe('Bootstrap Field Inputs', () => {
       });
     });
     
-    
     describe('conditional elements', ()=>{
       describeConditional('input');
     });
@@ -293,6 +300,8 @@ describe('Bootstrap Field Inputs', () => {
     });
     
   });
+
+  return;
   
   describe('Select', () => {
     describe('functions', ()=>{
