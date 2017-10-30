@@ -387,8 +387,6 @@ describe('Bootstrap Field Inputs', () => {
       expect(inputs).to.be.length(1);
     });
   });
-
-  return;
   
   describe("List", () => {
     describe('checkbox functions', ()=>{
@@ -451,6 +449,23 @@ describe('Bootstrap Field Inputs', () => {
       expect(labels[1].textContent).to.contain('Foo');
       expect(inputs[1].value).to.equal('foo');
       expect(labels[2].textContent).to.contain('Bar');            
+    });
+
+    it('boolean options', done => {
+      data.fields[0].type = 'list';
+      data.fields[0].options = [
+	{ label: 'Foo', value: true },
+	{ label: 'Bar', value: false }
+      ];
+      data.model.test = [false];
+      createForm();
+      expect(vm.$el.querySelectorAll('input')[1].checked).to.be.true;
+      data.model.test.push(true);
+      setTimeout(()=>{
+	expect(vm.$el.querySelectorAll('input')[0].checked).to.be.true;
+	expect(vm.$el.querySelectorAll('input')[1].checked).to.be.true;
+	done();
+      });
     });
 
     it('sets defaults', () => {
