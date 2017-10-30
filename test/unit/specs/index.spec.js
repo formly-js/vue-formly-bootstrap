@@ -365,8 +365,6 @@ describe('Bootstrap Field Inputs', () => {
     });
     
   });
-
-  return;
   
   describe('Textarea', () => {
     describe('functions', ()=>{
@@ -389,6 +387,8 @@ describe('Bootstrap Field Inputs', () => {
       expect(inputs).to.be.length(1);
     });
   });
+
+  return;
   
   describe("List", () => {
     describe('checkbox functions', ()=>{
