@@ -300,8 +300,6 @@ describe('Bootstrap Field Inputs', () => {
     });
     
   });
-
-  return;
   
   describe('Select', () => {
     describe('functions', ()=>{
@@ -348,9 +346,28 @@ describe('Bootstrap Field Inputs', () => {
       expect(option.value).to.equal('bar');
       expect(option.innerHTML).to.equal('Foo');
     });
+
+    it('boolean options', done => {
+      data.model.test = false;
+      data.fields[0].type = 'select';
+      data.fields[0].options = [
+	{ label: 'Foo', value: true },
+	{ label: 'Foo', value: false }
+      ];
+      createForm();
+      const select = vm.$el.querySelectorAll('select');
+      expect(select[0].selectedIndex).to.equal(1);
+      vm.model.test = true;
+      setTimeout(() => {
+	expect(select[0].selectedIndex).to.equal(0);
+	done();
+      });
+    });
     
   });
 
+  return;
+  
   describe('Textarea', () => {
     describe('functions', ()=>{
       describeFunctions('textarea', 'textarea');
