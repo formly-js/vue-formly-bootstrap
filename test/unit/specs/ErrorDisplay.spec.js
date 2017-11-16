@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import sinonChai from 'sinon-chai';
 import sinon from 'sinon';
 import Vue from 'vue';
-import errorDisplay from 'src/components/errorDisplay.vue';
+import errorDisplay from 'src/components/errorDisplay';
 
 let el, vm, data;
 

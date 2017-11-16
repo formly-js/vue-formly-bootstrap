@@ -17,7 +17,15 @@ function createForm(){
   //el.innerHTML = '<formly-form :form="form" :model="model" :fields="fields"></formly-form>';
   vm = new Vue({
     data: data,
-    template: '<formly-form :form="form" :model="model" :fields="fields"></formly-form>'
+    render(h){
+      return h('formly-form', {
+	props: {
+	  form: this.form,
+	  fields: this.fields,
+	  model: this.model
+	}
+      });
+    }
   }).$mount(el);
 
   return [el, vm];
@@ -226,7 +234,6 @@ describe('Bootstrap Field Inputs', () => {
       });
     });
     
-    
     describe('conditional elements', ()=>{
       describeConditional('input');
     });
@@ -339,9 +346,54 @@ describe('Bootstrap Field Inputs', () => {
       expect(option.value).to.equal('bar');
       expect(option.innerHTML).to.equal('Foo');
     });
+
+    describe('boolean options', () => {
+      it('sets boolean values', done => {
+	data.model.test = '';
+	data.fields[0].type = 'select';
+	data.fields[0].options = [
+	  { label: 'Foo', value: true },
+	  { label: 'Foo', value: false }
+	];
+	createForm();
+	const select = vm.$el.querySelectorAll('select');
+	select[0].value = 'false';
+	trigger(select[0], 'change');
+	setTimeout(() => {
+	  expect(vm.model.test).to.be.false;
+	  select[0].value = 'true';
+	  trigger(select[0], 'change');
+	  setTimeout(() => {
+	    expect(vm.model.test).to.be.true;
+	    done();
+	  });
+	});
+      });
+      
+      it('takes boolean values', done => {
+	data.model.test = false;
+	data.fields[0].type = 'select';
+	data.fields[0].options = [
+	  { label: 'Foo', value: true },
+	  { label: 'Foo', value: false }
+	];
+	createForm();
+	const select = vm.$el.querySelectorAll('select');
+	expect(select[0].selectedIndex).to.equal(1);
+	vm.model.test = true;
+	setTimeout(() => {
+	  expect(select[0].selectedIndex).to.equal(0);
+	  vm.model.test = false;
+	  setTimeout(() => {
+	    expect(select[0].selectedIndex).to.equal(1);
+	    done();
+	  });
+	});
+      });
+    });
     
   });
-
+  
   describe('Textarea', () => {
     describe('functions', ()=>{
       describeFunctions('textarea', 'textarea');
@@ -426,6 +478,92 @@ describe('Bootstrap Field Inputs', () => {
       expect(inputs[1].value).to.equal('foo');
       expect(labels[2].textContent).to.contain('Bar');            
     });
+
+    describe('boolean options', () => {
+      describe('checkbox', () => {
+	it('sets boolean values', done => {
+	  data.fields[0].type = 'list';
+	  data.fields[0].options = [
+	    { label: 'Foo', value: true },
+	    { label: 'Bar', value: false }
+	  ];
+	  createForm();
+
+	  const inputs = vm.$el.querySelectorAll('input');
+	  inputs[0].checked = true;
+	  trigger(inputs[0], 'change');
+	  setTimeout(() => {
+	    expect(vm.model.test.indexOf(true)).to.equal(0);
+	    inputs[1].checked = true;
+	    trigger(inputs[1], 'change');
+	    setTimeout(() => {
+	      expect(vm.model.test.indexOf(false)).to.equal(1);
+	      done();
+	    });
+	  });
+	});
+
+	it('takes boolean values', done => {
+	  data.fields[0].type = 'list';
+	  data.fields[0].options = [
+	    { label: 'Foo', value: true },
+	    { label: 'Bar', value: false }
+	  ];
+	  data.model.test = [false];
+	  createForm();
+	  expect(vm.$el.querySelectorAll('input')[1].checked).to.be.true;
+	  data.model.test.push(true);
+	  setTimeout(()=>{
+	    expect(vm.$el.querySelectorAll('input')[0].checked).to.be.true;
+	    expect(vm.$el.querySelectorAll('input')[1].checked).to.be.true;
+	    done();
+	  });
+	});
+      });// checkbox
+
+      describe('radio', () => {
+	it('sets boolean values', done => {
+	  data.fields[0].type = 'list';
+	  data.fields[0].templateOptions.inputType = 'radio';
+	  data.fields[0].options = [
+	    { label: 'Foo', value: true },
+	    { label: 'Bar', value: false }
+	  ];
+	  createForm();
+
+	  const inputs = vm.$el.querySelectorAll('input');
+	  inputs[0].checked = true;
+	  trigger(inputs[0], 'change');
+	  setTimeout(() => {
+	    expect(vm.model.test).to.be.true;
+	    inputs[1].checked = true;
+	    trigger(inputs[1], 'change');
+	    setTimeout(() => {
+	      expect(vm.model.test).to.be.false;
+	      done();
+	    });
+	  });
+	});
+
+	it('takes boolean values', done => {
+	  data.fields[0].type = 'list';
+	  data.fields[0].templateOptions.inputType = 'radio';
+	  data.fields[0].options = [
+	    { label: 'Foo', value: true },
+	    { label: 'Bar', value: false }
+	  ];
+	  data.model.test = false;
+	  createForm();
+	  expect(vm.$el.querySelectorAll('input')[1].checked).to.be.true;
+	  data.model.test = true;
+	  setTimeout(()=>{
+	    expect(vm.$el.querySelectorAll('input')[0].checked).to.be.true;
+	    expect(vm.$el.querySelectorAll('input')[1].checked).to.be.false;
+	    done();
+	  });
+	});
+      });// radio
+    });// boolean values
 
     it('sets defaults', () => {
       data.fields[0].type = 'list';
