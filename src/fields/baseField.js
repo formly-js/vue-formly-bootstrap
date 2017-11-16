@@ -16,6 +16,9 @@ export default
     this.$set(this.form, this.field.key, state);
   },
   methods: {
+    booleanValue(value){
+      return ( value === 'true' || value === 'false' ) ? value === 'true' : value;
+    },
     runFunction: function(action, e){
       if ( typeof this.to[action] == 'function' ) this.to[action].call(this, e);
     },

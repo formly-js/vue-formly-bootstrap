@@ -53,20 +53,21 @@ export default {
 		keydown: this.onKeydown,
 		change(event){
 		  const isChecked = event.target.checked;
+		  const val = self.booleanValue( event.target.value );
 		  // we need to add/remove differently depending on the type of input we're using
 		  if ( isArray ){
 		    if ( isChecked ){
 		      // if it's a checkbox, and hence an array, push it
-		      self.model[ self.field.key ].push( event.target.value );
+		      self.model[ self.field.key ].push( val );
 		    } else {
 		      // otherwise remove it
-		      const valueIdx = self.model[ self.field.key ].indexOf( event.target.value );
+		      const valueIdx = self.model[ self.field.key ].indexOf( val );
 		      if ( valueIdx > -1 ) self.model[ self.field.key ].splice( valueIdx, 1 );
 		    }
 		  } else {
-		    self.model[ self.field.key ] = isChecked ? event.target.value : null;
+		    self.model[ self.field.key ] = isChecked ? val : null;
 		  }
-		  self.$emit('change', event.target.value);
+		  self.$emit('change', val);
 		  if ( typeof self.onChange === 'function' ) self.onChange(event);
 		}
 	      }

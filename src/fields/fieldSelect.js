@@ -50,8 +50,9 @@ export default {
 	  keyup: this.onKeyup,
 	  keydown: this.onKeydown,
 	  change(event){
-	    self.model[ self.field.key ] = event.target.value;
-	    self.$emit('change', event.target.value);
+	    const val = self.booleanValue( event.target.value );
+	    self.model[ self.field.key ] = val;
+	    self.$emit('change', val);
 	    if ( typeof self.onChange === 'function' ) self.onChange(event);
 	  }
 	}
