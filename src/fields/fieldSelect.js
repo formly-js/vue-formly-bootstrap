@@ -51,7 +51,7 @@ export default {
 	  keydown: this.onKeydown,
 	  change(event){
 	    const val = self.booleanValue( event.target.value );
-	    self.model[ self.field.key ] = val;
+	    self.$formlySet( self.model, self.field.key, val );
 	    self.$emit('change', val);
 	    if ( typeof self.onChange === 'function' ) self.onChange(event);
 	  }

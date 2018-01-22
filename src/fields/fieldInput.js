@@ -30,7 +30,7 @@ export default {
 	},
 	on: {
 	  input(event){
-	    self.model[ self.field.key ] = event.target.value;
+	    self.$formlySet( self.model, self.field.key, event.target.value );
 	    self.$emit('input', event.target.value);
 	  },
 	  blur: this.onBlur,
