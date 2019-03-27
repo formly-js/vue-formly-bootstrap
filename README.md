@@ -63,7 +63,7 @@ let vm = new Vue({
 });
 ```
 ```html
-<div id="el">
+<div id="app">
    <form @submit="doSomething">
       <formly-form :form="form" :model="model" :fields="fields">
          <button>Submit</button>
